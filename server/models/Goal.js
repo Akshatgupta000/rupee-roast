@@ -2,26 +2,33 @@ import mongoose from 'mongoose';
 
 const goalSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User'
     },
-    goalName: {
+    title: {
       type: String,
-      required: [true, 'Please add a goal name']
+      required: [true, 'Please add a goal title']
     },
     targetAmount: {
       type: Number,
-      required: [true, 'Please add a target amount']
-    },
-    targetDate: {
-      type: Date,
-      required: [true, 'Please add a target date']
+      required: [true, 'Please add a target amount'],
+      min: [0, 'Target amount cannot be negative']
     },
     savedAmount: {
       type: Number,
-      default: 0
+      default: 0,
+      min: [0, 'Saved amount cannot be negative']
+    },
+    deadline: {
+      type: Number,
+      required: [true, 'Please add a deadline in months']
+    },
+    status: {
+      type: String,
+      enum: ['active', 'completed'],
+      default: 'active'
     }
   },
   {

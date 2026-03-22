@@ -5,10 +5,13 @@ import {
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer, 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend 
 } from 'recharts';
-import { IndianRupee, TrendingDown, AlertTriangle } from 'lucide-react';
+import { IndianRupee, TrendingDown, AlertTriangle, Target, Wallet } from 'lucide-react';
 
 const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
+  const [goals, setGoals] = useState([]);
+  const [budget, setBudget] = useState(null);
+  const [newBudget, setNewBudget] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,12 +20,30 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const res = await api.get('/expenses');
-      setExpenses(res.data);
+      const [expRes, goalsRes, budgetRes] = await Promise.all([
+        api.get('/expenses'),
+        api.get('/goals'),
+        api.get('/budget/current')
+      ]);
+      setExpenses(expRes.data);
+      setGoals(goalsRes.data);
+      setBudget(budgetRes.data?.monthlyBudget || null);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const saveBudget = async (e) => {
+    e.preventDefault();
+    if (!newBudget || isNaN(newBudget) || Number(newBudget) <= 0) return;
+    try {
+      const res = await api.post('/budget/set', { monthlyBudget: Number(newBudget) });
+      setBudget(res.data.monthlyBudget);
+      setNewBudget('');
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -109,6 +130,60 @@ const Dashboard = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* My Monthly Budget Card */}
+      <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay: 0.25 }} className="neo-card p-0 mt-8 bg-white relative overflow-hidden border-4 border-black shadow-[8px_8px_0px_black]">
+        <div className="bg-[#fbbf24] text-black p-4 border-b-4 border-black flex justify-between items-center">
+          <h2 className="text-2xl font-black uppercase tracking-tight">My Monthly Budget</h2>
+          <Wallet size={24} />
+        </div>
+        <div className="p-4 md:p-6 bg-surface grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div>
+            {budget === null || budget === 0 ? (
+              <div className="text-red-500 font-bold uppercase animate-pulse border-2 border-red-500 p-2 inline-block shadow-[2px_2px_0px_red]">
+                ⚠️ Budget not set for this month!
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <div className="flex justify-between border-b-[3px] border-black border-dashed pb-1">
+                  <span className="font-bold uppercase">Budget:</span>
+                  <span className="font-black text-xl">₹{budget.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between border-b-[3px] border-black border-dashed pb-1">
+                  <span className="font-bold uppercase">Total Spending:</span>
+                  <span className="font-black text-xl text-red-600">₹{totalSpent.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between pt-1">
+                  <span className="font-bold uppercase text-lg">Remaining:</span>
+                  <span className={`font-black text-2xl ${budget - totalSpent < 0 ? 'text-red-500' : 'text-[#a3e635]'}`}>
+                    ₹{(budget - totalSpent).toLocaleString()}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+          <form onSubmit={saveBudget} className="flex flex-col gap-2">
+            <label className="font-black uppercase text-sm">
+              {budget ? "Update Budget" : "Set Budget"}
+            </label>
+            <div className="flex gap-2">
+              <input 
+                type="number" 
+                placeholder="e.g. 40000" 
+                value={newBudget}
+                onChange={e => setNewBudget(e.target.value)}
+                className="flex-1 w-full border-4 border-black p-3 font-bold focus:outline-none focus:bg-yellow-100 placeholder-gray-500"
+              />
+              <button 
+                type="submit"
+                className="bg-black text-white px-6 font-black uppercase border-4 border-black hover:bg-[#a3e635] hover:text-black hover:-translate-y-1 hover:shadow-[4px_4px_0px_black] transition-all"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </motion.div>
 
       {/* Charts List */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
@@ -221,6 +296,37 @@ const Dashboard = () => {
               )}
             </tbody>
           </table>
+        </div>
+      </motion.div>
+
+      {/* Saving Goals Preview */}
+      <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay: 0.6 }} className="neo-card p-0 mt-12 bg-white relative overflow-hidden">
+        <div className="bg-purple-300 text-black p-4 border-b-4 border-black flex justify-between items-center">
+          <h2 className="text-2xl font-black uppercase tracking-tight">Saving Goals Overview</h2>
+          <Target className="animate-spin-slow" size={24} />
+        </div>
+        <div className="p-4 md:p-6 bg-surface">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {goals.length > 0 ? goals.slice(0, 2).map((g, idx) => (
+              <div key={idx} className="border-4 border-black p-4 bg-[#fef08a] hover:-translate-y-1 shadow-[4px_4px_0px_black] transition-all">
+                <h3 className="font-black text-xl uppercase mb-2">{g.title}</h3>
+                <div className="w-full h-4 border-2 border-black bg-white mb-2 relative">
+                  <div className="h-full bg-[#a3e635] border-r-2 border-black" style={{ width: `${Math.min((g.savedAmount/g.targetAmount)*100, 100)}%` }}></div>
+                </div>
+                <div className="flex justify-between font-bold text-sm">
+                  <span>Saved: ₹{g.savedAmount}</span>
+                  <span>Target: ₹{g.targetAmount}</span>
+                </div>
+                <p className="mt-2 text-sm font-black text-black/70">
+                  Remaining: ₹{Math.max(0, g.targetAmount - g.savedAmount)}
+                </p>
+              </div>
+            )) : (
+              <div className="col-span-full border-4 border-black border-dashed p-6 text-center font-black uppercase text-gray-500 bg-white">
+                No active goals. <a href="/goals" className="text-black underline decoration-2">Set one now!</a>
+              </div>
+            )}
+          </div>
         </div>
       </motion.div>
 

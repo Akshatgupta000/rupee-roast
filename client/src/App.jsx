@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Expenses from './pages/Expenses';
 import Goals from './pages/Goals';
+import Savings from './pages/Savings';
 import Roast from './pages/Roast';
 
 // Protected Route Component
@@ -43,6 +44,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/goals" element={<Goals />} />
+            <Route path="/savings" element={<Savings />} />
             <Route path="/roast" element={<Roast />} />
           </Route>
         </Routes>
