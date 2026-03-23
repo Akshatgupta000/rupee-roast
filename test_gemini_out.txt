@@ -1,0 +1,4 @@
+{
+  "status": "error",
+  "message": "GEMINI_API_KEY is not configured. Please check your .env file."
+}

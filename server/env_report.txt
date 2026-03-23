@@ -1,0 +1,7 @@
+Loading .env from: D:\projects\ruupee\rupee-roast\server\.env
+PORT: 5000
+JWT_SECRET: Exists
+MONGO_URI: Exists
+GOOGLE_API_KEY: Exists
+GEMINI_API_KEY: Exists
+GEMINI_MODEL: gemini-2.0-flash

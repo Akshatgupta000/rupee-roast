@@ -8,6 +8,7 @@ import expenseRoutes from './routes/expenseRoutes.js';
 import goalRoutes from './routes/goalRoutes.js';
 import roastRoutes from './routes/roastRoutes.js';
 import budgetRoutes from './routes/budgetRoutes.js';
+import financeRoutes from './routes/financeRoutes.js';
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use('/api/expenses', expenseRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/roast', roastRoutes);
 app.use('/api/budget', budgetRoutes);
+app.use('/api/finance', financeRoutes);
 
 app.get('/', (req, res) => res.send('Rupee Roast API is running...'));
 
