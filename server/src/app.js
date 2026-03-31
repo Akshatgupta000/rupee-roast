@@ -42,7 +42,14 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    process.env.CLIENT_URL
+  ].filter(Boolean),
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -68,6 +75,7 @@ app.use('/roast', roastRoutes);
 app.use('/budget', budgetRoutes);
 app.use('/finance', financeRoutes);
 
+app.get('/api/health', (req, res) => res.json({ status: 'OK' }));
 app.get('/', (req, res) => res.send('Rupee Roast API is running...'));
 
 // Error handling middleware (must be registered before starting the server)
