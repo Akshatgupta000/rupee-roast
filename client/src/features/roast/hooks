@@ -17,14 +17,14 @@ export const useRoast = () => {
     setRoastData(null);
 
     try {
-      const res = await api.post('/roast');
-      const data = res?.data;
+      const res = await api.post('/roast/generate', { forceRefresh: true });
+      const payload = res?.data?.data || res?.data;
       
-      if (!data?.roast) {
-        throw new Error('AI response missing required fields.');
+      if (!payload?.roast || !payload?.insight || !payload?.suggestion) {
+        throw new Error('AI response missing required fields (roast/insight/suggestion).');
       }
       
-      setRoastData(data);
+      setRoastData(payload);
     } catch (err) {
       console.error('Roast hook error:', err);
       setError(err.message || 'Failed to generate roast. Please try again.');

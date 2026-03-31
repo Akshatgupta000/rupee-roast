@@ -4,7 +4,6 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import connectDB from './config/db.js';
-import rateLimit from 'express-rate-limit';
 import errorMiddleware from './middleware/errorMiddleware.js';
 import fs from 'fs';
 import path from 'path';
@@ -61,13 +60,21 @@ app.use('/api/roast', roastRoutes);
 app.use('/api/budget', budgetRoutes);
 app.use('/api/finance', financeRoutes);
 
+// Spec-friendly aliases (no /api prefix)
+app.use('/auth', authRoutes);
+app.use('/expenses', expenseRoutes);
+app.use('/goals', goalRoutes);
+app.use('/roast', roastRoutes);
+app.use('/budget', budgetRoutes);
+app.use('/finance', financeRoutes);
+
 app.get('/', (req, res) => res.send('Rupee Roast API is running...'));
+
+// Error handling middleware (must be registered before starting the server)
+app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// Error handling middleware
-app.use(errorMiddleware);

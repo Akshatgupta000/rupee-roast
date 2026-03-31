@@ -10,6 +10,7 @@ const errorMiddleware = (err, req, res, next) => {
   }
 
   res.status(statusCode).json({
+    success: false,
     message: err.message || 'An unexpected error occurred',
     stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
   });

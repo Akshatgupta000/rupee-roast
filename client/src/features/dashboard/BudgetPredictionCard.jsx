@@ -14,9 +14,22 @@ const BudgetPredictionCard = ({ prediction, loading }) => {
 
   if (!prediction) return null;
 
-  const { balance, avgDailySpend, predictedDaysLeft, predictedHoursLeft, warning } = prediction;
+  const { balance, avgDailySpend } = prediction;
+
+  // Calculate live countdown based on the balance and daily burn Rate
+  let predictedDaysLeft = 0;
+  let predictedHoursLeft = 0;
+
+  if (avgDailySpend > 0 && balance > 0) {
+    const totalHoursLeft = (balance / avgDailySpend) * 24;
+    predictedDaysLeft = Math.floor(totalHoursLeft / 24);
+    predictedHoursLeft = Math.floor(totalHoursLeft % 24);
+  } else if (balance > 0) {
+    predictedDaysLeft = 999;
+  }
 
   const isDying = predictedDaysLeft < 5;
+  const warning = predictedDaysLeft < 7 ? "Danger: Your money is dying fast!" : "Safe for now, but watch out.";
 
   return (
     <motion.div 
@@ -37,7 +50,9 @@ const BudgetPredictionCard = ({ prediction, loading }) => {
       <div className="space-y-4 flex-grow">
         <div className="flex justify-between items-end border-b-2 border-dashed border-black pb-2">
           <span className="text-gray-500 font-bold uppercase text-xs">Remaining Balance</span>
-          <span className="text-2xl font-black">₹{balance.toLocaleString()}</span>
+          <span className="text-2xl font-black">
+            {balance < 0 ? `-₹${Math.abs(balance).toLocaleString()}` : `₹${balance.toLocaleString()}`}
+          </span>
         </div>
         
         <div className="flex justify-between items-end border-b-2 border-dashed border-black pb-2">

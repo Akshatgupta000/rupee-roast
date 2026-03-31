@@ -30,6 +30,13 @@ const FinancialHealthCard = ({ healthData, loading }) => {
     return <ShieldAlert className="w-8 h-8" />;
   };
 
+  const getDisciplineLabel = () => {
+    if (score >= 80) return 'CA Approved';
+    if (score >= 60) return 'Theek Thaak';
+    if (score >= 40) return 'Wallet Danger Zone';
+    return 'Papa ko pata chala toh khatam';
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -42,6 +49,9 @@ const FinancialHealthCard = ({ healthData, loading }) => {
             Financial Health
           </h2>
           <p className="text-black/80 font-bold uppercase text-sm mt-1">{status}</p>
+          <p className="mt-2 inline-flex items-center bg-white/30 border-2 border-black px-3 py-1 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            {getDisciplineLabel()}
+          </p>
         </div>
         <div className="bg-white border-2 border-black p-2">
           {getStatusIcon()}

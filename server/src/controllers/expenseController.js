@@ -3,9 +3,9 @@ import Expense from '../models/Expense.js';
 export const getExpenses = async (req, res) => {
   try {
     const expenses = await Expense.find({ userId: req.user.id }).sort({ date: -1 });
-    res.json(expenses);
+    return res.json({ success: true, data: expenses });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -14,7 +14,7 @@ export const createExpense = async (req, res) => {
     const { title, amount, category, type, date, notes } = req.body;
 
     if (!title || !amount || !category || !type) {
-      return res.status(400).json({ message: 'Please add all required fields' });
+      return res.status(400).json({ success: false, message: 'Please add all required fields' });
     }
 
     const expense = await Expense.create({
@@ -27,9 +27,9 @@ export const createExpense = async (req, res) => {
       notes
     });
 
-    res.status(201).json(expense);
+    return res.status(201).json({ success: true, data: expense });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -38,11 +38,11 @@ export const updateExpense = async (req, res) => {
     const expense = await Expense.findById(req.params.id);
 
     if (!expense) {
-      return res.status(404).json({ message: 'Expense not found' });
+      return res.status(404).json({ success: false, message: 'Expense not found' });
     }
 
     if (expense.userId.toString() !== req.user.id) {
-      return res.status(401).json({ message: 'User not authorized' });
+      return res.status(401).json({ success: false, message: 'User not authorized' });
     }
 
     const updatedExpense = await Expense.findByIdAndUpdate(
@@ -51,9 +51,9 @@ export const updateExpense = async (req, res) => {
       { new: true }
     );
 
-    res.json(updatedExpense);
+    return res.json({ success: true, data: updatedExpense });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -62,17 +62,17 @@ export const deleteExpense = async (req, res) => {
     const expense = await Expense.findById(req.params.id);
 
     if (!expense) {
-      return res.status(404).json({ message: 'Expense not found' });
+      return res.status(404).json({ success: false, message: 'Expense not found' });
     }
 
     if (expense.userId.toString() !== req.user.id) {
-      return res.status(401).json({ message: 'User not authorized' });
+      return res.status(401).json({ success: false, message: 'User not authorized' });
     }
 
     await expense.deleteOne();
 
-    res.json({ id: req.params.id });
+    return res.json({ success: true, data: { id: req.params.id } });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };

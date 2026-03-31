@@ -5,7 +5,7 @@ export const setBudget = async (req, res) => {
     const { monthlyBudget } = req.body;
     
     if (monthlyBudget === undefined || monthlyBudget < 0) {
-      return res.status(400).json({ message: 'Please provide a valid monthly budget' });
+      return res.status(400).json({ success: false, message: 'Please provide a valid monthly budget' });
     }
 
     const currentDate = new Date();
@@ -30,9 +30,9 @@ export const setBudget = async (req, res) => {
       });
     }
 
-    res.status(200).json(budget);
+    return res.status(200).json({ success: true, data: budget });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -50,11 +50,11 @@ export const getCurrentBudget = async (req, res) => {
 
     if (!budget) {
       // Optional: return 0 if no budget is set
-      return res.status(200).json({ monthlyBudget: 0 });
+      return res.status(200).json({ success: true, data: { monthlyBudget: 0 } });
     }
 
-    res.status(200).json(budget);
+    return res.status(200).json({ success: true, data: budget });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };

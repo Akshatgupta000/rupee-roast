@@ -21,8 +21,8 @@ const GoalCard = ({ goal, onSave, onUpdate }) => {
   const getAnalysis = async () => {
     setLoadingAnalysis(true);
     try {
-      const { data } = await api.get(`/goals/analysis/${goal._id}`);
-      setAnalysis(data);
+      const res = await api.get(`/goals/analysis/${goal._id}`);
+      setAnalysis(res.data?.data || null);
     } catch (err) {
       console.error(err);
     }
@@ -37,9 +37,9 @@ const GoalCard = ({ goal, onSave, onUpdate }) => {
       // Easiest is to always fetch analysis first if not present
       let currentAnalysis = analysis;
       if (!currentAnalysis) {
-        const { data } = await api.get(`/goals/analysis/${goal._id}`);
-        currentAnalysis = data;
-        setAnalysis(data);
+        const res = await api.get(`/goals/analysis/${goal._id}`);
+        currentAnalysis = res.data?.data || null;
+        setAnalysis(res.data?.data || null);
       }
 
       const { data } = await api.post(`/goals/roast`, {
@@ -51,7 +51,7 @@ const GoalCard = ({ goal, onSave, onUpdate }) => {
         monthsLeft: goal.deadline
       });
       
-      setRoast(data.roast);
+      setRoast(data?.data?.roast || data?.roast || '');
     } catch (err) {
       setRoast("Beta server down hai, paise bachao aur error handling theek karo.");
     }

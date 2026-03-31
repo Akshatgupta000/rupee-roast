@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import api from '../../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, ArrowRight, Skull, Frown, ThumbsUp } from 'lucide-react';
+import { Flame, ArrowRight, Skull } from 'lucide-react';
 import {
   ResponsiveContainer,
   BarChart,
@@ -12,6 +12,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from 'recharts';
+import RoastCard from './RoastCard';
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -21,12 +22,37 @@ const Roast = () => {
   const [error, setError] = useState('');
   const [expenses, setExpenses] = useState([]);
   const [expensesLoading, setExpensesLoading] = useState(true);
+  const [roastMeta, setRoastMeta] = useState({ cached: false, fallbackUsed: false });
+  const [healthScore, setHealthScore] = useState(null);
+  const [loadingText, setLoadingText] = useState('');
+
+  const roastModes = [
+    { id: 'chill', label: 'Chill Friend 😄', hint: 'Warm & friendly teasing' },
+    { id: 'savage', label: 'Savage Dost 🔥', hint: 'Sharper sarcasm, still respectful' },
+    { id: 'mom', label: 'Indian Mom Mode 👩‍👦', hint: 'Disappointed beta vibes' },
+    { id: 'ca', label: 'CA Uncle Mode 📊', hint: 'ROI, percentages, finance-nerd roast' },
+  ];
+
+  const roastLoadingMessages = [
+    'AI tumhari financial life ka postmortem kar raha hai...',
+    'Roast chef data paka raha hai...',
+    'Tumhare wallet ka audit chal raha hai (with love)...',
+    'Delulu check: pending...',
+  ];
+
+  const [roastMode, setRoastMode] = useState(() => {
+    try {
+      return localStorage.getItem('roastMode') || 'chill';
+    } catch (e) {
+      return 'chill';
+    }
+  });
 
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
         const res = await api.get('/expenses');
-        setExpenses(Array.isArray(res?.data) ? res.data : []);
+            setExpenses(Array.isArray(res?.data?.data) ? res.data.data : []);
       } catch (err) {
         // Chart is best-effort; roast itself can still work.
         console.error('Failed to load expenses for chart:', err);
@@ -39,6 +65,27 @@ const Roast = () => {
     fetchExpenses();
   }, []);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('roastMode', roastMode);
+    } catch (e) {
+      // Ignore storage failures (e.g., private mode).
+    }
+  }, [roastMode]);
+
+  useEffect(() => {
+    const fetchHealthScore = async () => {
+      try {
+        const res = await api.get('/finance/health-score');
+        setHealthScore(res?.data?.data?.score ?? null);
+      } catch (e) {
+        // Not critical for roast generation; best-effort.
+      }
+    };
+
+    fetchHealthScore();
+  }, []);
+
   const currentMonthExpenses = useMemo(() => {
     const valid = Array.isArray(expenses) ? expenses : [];
     const now = new Date();
@@ -47,6 +94,21 @@ const Roast = () => {
       return !Number.isNaN(d.getTime()) && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
     });
   }, [expenses]);
+
+  const amountLine = useMemo(() => {
+    const valid = Array.isArray(currentMonthExpenses) ? currentMonthExpenses : [];
+    const total = valid.reduce((sum, e) => sum + (Number(e?.amount) || 0), 0);
+
+    const byCat = valid.reduce((acc, e) => {
+      const cat = String(e?.category ?? 'Other');
+      acc[cat] = (acc[cat] || 0) + (Number(e?.amount) || 0);
+      return acc;
+    }, {});
+
+    const top = Object.entries(byCat).sort((a, b) => b[1] - a[1])[0]?.[0] ?? '';
+    if (total <= 0 || !top) return '';
+    return `₹${total.toLocaleString()} on ${top} spend`;
+  }, [currentMonthExpenses]);
 
   const spendByTypeData = useMemo(() => {
     const totals = currentMonthExpenses.reduce(
@@ -69,17 +131,24 @@ const Roast = () => {
   const handleRoast = async (retryCount = 0) => {
     if (loading && retryCount === 0) return;
     
+    const pickLoadingText = () => roastLoadingMessages[Math.floor(Math.random() * roastLoadingMessages.length)];
     setLoading(true);
     setError('');
     if (retryCount === 0) setRoastData(null);
+    if (retryCount === 0) setRoastMeta({ cached: false, fallbackUsed: false });
+    if (retryCount === 0) setLoadingText(pickLoadingText());
     
     try {
-      const res = await api.post('/roast');
-      const data = res?.data;
-      if (!data?.roast || !data?.advice || !data?.suggestion) {
-        throw new Error('AI response missing required fields (roast/advice/suggestion).');
+      const res = await api.post('/roast/generate', { roastMode, forceRefresh: true });
+      const payload = res?.data?.data || res?.data;
+      if (!payload?.roast || !payload?.insight || !payload?.suggestion) {
+        throw new Error('AI response missing required fields (roast/insight/suggestion).');
       }
-      setRoastData(data);
+      setRoastData(payload);
+      setRoastMeta({
+        cached: Boolean(res?.data?.cached),
+        fallbackUsed: Boolean(res?.data?.fallbackUsed),
+      });
     } catch (err) {
       console.error('Roast error:', err);
 
@@ -115,17 +184,37 @@ const Roast = () => {
           <div className="inline-flex p-6 bg-wrapped-pink border-[4px] border-black rounded-none mb-10 shadow-hard animate-wobble">
             <Flame size={80} className="text-white" />
           </div>
-          <h1 className="text-6xl md:text-8xl font-black text-white mb-6 uppercase tracking-tighter text-stroke-2 font-heading leading-none">Ready to face reality?</h1>
+          <h1 className="text-6xl md:text-8xl font-black text-white mb-6 uppercase tracking-tighter text-stroke-2 font-heading leading-none">
+            Wallet reality ke liye ready?
+          </h1>
           <p className="text-xl md:text-2xl font-mono font-bold text-black bg-wrapped-yellow border-[3px] border-black p-4 shadow-hard mb-12 transform -rotate-1">
-            Our AI Indian Dad has reviewed your recent spending habits. Let's see if you survive the roast.
+            AI tumhari financial life ka stand-up karne wali hai. Tum survive kar paoge ya nahi?
           </p>
+
+          <div className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="font-black uppercase text-xs bg-white border-2 border-black px-3 py-2 shadow-hard">
+              Roast Mode
+            </div>
+            <select
+              value={roastMode}
+              onChange={(e) => setRoastMode(e.target.value)}
+              className="bg-black text-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(255,0,153,1)] px-4 py-3 font-black uppercase tracking-tighter text-base"
+              title="Pick your roast intensity. Same wallet, different tone."
+            >
+              {roastModes.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.label}
+                </option>
+              ))}
+            </select>
+          </div>
           
           <button 
             onClick={handleRoast}
             disabled={loading}
             className="group relative px-10 py-5 bg-black text-white font-black text-3xl uppercase tracking-tighter border-4 border-wrapped-pink shadow-[8px_8px_0px_0px_rgba(255,0,153,1)] transition-all hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none flex items-center justify-center gap-4 mx-auto"
           >
-            ROAST ME NOW
+            Sach sunne ki himmat hai? 🔥
             <ArrowRight size={36} className="text-wrapped-pink group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
           </button>
           
@@ -142,7 +231,7 @@ const Roast = () => {
         <div className="flex flex-col items-center justify-center space-y-8 absolute top-[40%]">
           <div className="w-32 h-32 border-[8px] border-black border-t-wrapped-pink rounded-full animate-spin"></div>
           <p className="text-4xl font-black font-heading tracking-tighter uppercase text-white text-stroke-1 bg-black px-4 py-2 border-4 border-wrapped-pink animate-pulse">
-            Analyzing your terrible choices...
+            {loadingText || 'Roast chef data paka raha hai...'}
           </p>
         </div>
       )}
@@ -158,25 +247,14 @@ const Roast = () => {
               <div className="absolute top-[-30px] right-[-30px] opacity-10 rotate-12 pointer-events-none">
                 <Skull size={300} className="text-black" />
               </div>
-              
-              <div className="flex items-center justify-between mb-8 relative z-10 border-b-4 border-black pb-6">
-                <div className="flex items-center gap-4">
-                  <div className="p-4 bg-wrapped-black text-white rounded-none border-4 border-wrapped-pink shadow-[4px_4px_0px_0px_rgba(255,0,153,1)] animate-wobble">
-                    <Flame size={40} />
-                  </div>
-                  <h2 className="text-5xl font-black text-black uppercase font-heading tracking-tighter">The Verdict</h2>
-                </div>
-                <div className="font-mono font-bold bg-wrapped-pink text-white border-2 border-black px-4 py-2 text-xl shadow-hard hidden md:block rotate-3">
-                  100% TRUTH
-                </div>
-              </div>
-              
-              <div className="relative">
-                <div className="absolute top-0 left-0 w-8 h-full bg-wrapped-yellow border-r-4 border-black"></div>
-                <p className="text-2xl md:text-4xl text-black font-black leading-tight uppercase font-heading tracking-tighter relative z-10 pl-14 py-4 bg-white/90">
-                  "{roastData.roast}"
-                </p>
-              </div>
+
+              <RoastCard
+                roastData={roastData}
+                meta={roastMeta}
+                score={healthScore}
+                amountLine={amountLine}
+                variant="mini"
+              />
 
               {/* Charts: keep container size-safe to avoid Recharts -1/-1 warnings. */}
               <div className="mt-10 bg-wrapped-pink/20 border-4 border-black p-4 md:p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
@@ -223,39 +301,13 @@ const Roast = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="neo-card p-8 bg-wrapped-cyan hover:-translate-y-2 hover:rotate-1 transition-transform">
-                <div className="flex items-center gap-4 mb-6 border-b-4 border-black pb-4">
-                  <div className="bg-white p-3 border-[3px] border-black shadow-hard">
-                    <Frown size={32} className="text-black" />
-                  </div>
-                  <h3 className="text-3xl font-black uppercase font-heading tracking-tighter text-stroke-white-1">Brutal Advice</h3>
-                </div>
-                <p className="text-lg font-mono font-bold text-black bg-white p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase leading-relaxed">
-                  {roastData.advice}
-                </p>
-              </div>
-
-              <div className="neo-card p-8 bg-wrapped-lime hover:-translate-y-2 hover:-rotate-1 transition-transform">
-                <div className="flex items-center gap-4 mb-6 border-b-4 border-black pb-4">
-                  <div className="bg-white p-3 border-[3px] border-black shadow-hard">
-                    <ThumbsUp size={32} className="text-black" />
-                  </div>
-                  <h3 className="text-3xl font-black uppercase font-heading tracking-tighter text-stroke-white-1">How to fix it</h3>
-                </div>
-                <p className="text-lg font-mono font-bold text-black bg-white p-6 border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase leading-relaxed">
-                  {roastData.suggestion}
-                </p>
-              </div>
-            </div>
-
             <div className="text-center mt-12 pt-8">
               <button 
                 onClick={handleRoast}
                 disabled={loading}
                 className="neo-btn bg-white text-black text-2xl"
               >
-                Request another beating
+                Ek aur roast? 🔥
               </button>
             </div>
           </motion.div>

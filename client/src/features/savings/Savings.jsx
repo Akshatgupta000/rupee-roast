@@ -18,7 +18,7 @@ const Savings = () => {
   const fetchData = async () => {
     try {
       const budgetRes = await api.get('/budget/current');
-      setBudget(budgetRes.data?.monthlyBudget || 0);
+      setBudget(budgetRes.data?.data?.monthlyBudget || 0);
 
       // Fetch expenses for current month to calculate 'expenses'
       // We can use the existing expenses endpoint. Assuming it returns all expenses we can filter,
@@ -27,7 +27,7 @@ const Savings = () => {
       const currentMonth = new Date().getMonth();
       const currentYear = new Date().getFullYear();
       
-      const monthlyTotal = expensesRes.data.reduce((acc, curr) => {
+      const monthlyTotal = expensesRes.data?.data?.reduce((acc, curr) => {
         const d = new Date(curr.date);
         if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) {
           return acc + curr.amount;
@@ -50,7 +50,7 @@ const Savings = () => {
       const res = await api.post('/budget/set', {
         monthlyBudget: Number(newBudget)
       });
-      setBudget(res.data.monthlyBudget);
+      setBudget(res.data?.data?.monthlyBudget);
       setNewBudget('');
     } catch (err) {
       console.error(err);

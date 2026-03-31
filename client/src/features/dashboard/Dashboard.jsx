@@ -21,6 +21,7 @@ const Dashboard = () => {
   const [healthData, setHealthData] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [newBudget, setNewBudget] = useState('');
+  const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,18 +30,20 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const [expRes, goalsRes, budgetRes, healthRes, predRes] = await Promise.all([
+      const [expRes, goalsRes, budgetRes, healthRes, predRes, summaryRes] = await Promise.all([
         api.get('/expenses'),
         api.get('/goals'),
         api.get('/budget/current'),
         api.get('/finance/health-score'),
-        api.get('/finance/predict-budget')
+        api.get('/finance/predict-budget'),
+        api.get('/finance/summary'),
       ]);
-      setExpenses(expRes.data);
-      setGoals(goalsRes.data);
-      setBudget(budgetRes.data?.monthlyBudget || null);
-      setHealthData(healthRes.data);
-      setPrediction(predRes.data);
+      setExpenses(expRes.data?.data || []);
+      setGoals(goalsRes.data?.data || []);
+      setBudget(budgetRes.data?.data?.monthlyBudget ?? null);
+      setHealthData(healthRes.data?.data || null);
+      setPrediction(predRes.data?.data || null);
+      setSummary(summaryRes.data?.data || null);
     } catch (error) {
       console.error(error);
     } finally {
@@ -53,11 +56,11 @@ const Dashboard = () => {
     if (!newBudget || isNaN(newBudget) || Number(newBudget) <= 0) return;
     try {
       const res = await api.post('/budget/set', { monthlyBudget: Number(newBudget) });
-      setBudget(res.data.monthlyBudget);
+      setBudget(res.data?.data?.monthlyBudget ?? null);
       setNewBudget('');
       // Refresh prediction after budget change
       const predRes = await api.get('/finance/predict-budget');
-      setPrediction(predRes.data);
+      setPrediction(predRes.data?.data || null);
     } catch (error) {
       console.error(error);
     }
@@ -78,33 +81,57 @@ const Dashboard = () => {
   const impulsiveSpent = currentMonthExpenses.filter(e => e.type === 'impulsive').reduce((sum, e) => sum + e.amount, 0);
   const necessarySpent = currentMonthExpenses.filter(e => e.type === 'necessary').reduce((sum, e) => sum + e.amount, 0);
 
-  const categoryBreakdown = currentMonthExpenses.reduce((acc, e) => {
-    acc[e.category] = (acc[e.category] || 0) + e.amount;
-    return acc;
-  }, {});
+  const categoryBreakdown =
+    summary?.categoryBreakdown ??
+    currentMonthExpenses.reduce((acc, e) => {
+      acc[e.category] = (acc[e.category] || 0) + e.amount;
+      return acc;
+    }, {});
+
+  const categoryLabelMap = {
+    food: 'Pet Puja Fund 🍕',
+    transport: 'Traffic Tax 🚗',
+    shopping: 'Retail Therapy 🛍️',
+    entertainment: 'Monthly Paisa Drain 💸',
+    bills: 'Bill Board Chilla 🚨',
+    grocery: 'Ration Ransom 🥬',
+    other: 'Misc Money Mystery 🧩',
+    subscriptions: 'Monthly Paisa Drain 💸',
+  };
+
+  const getCategoryLabel = (cat) => categoryLabelMap[String(cat ?? '').toLowerCase()] || String(cat ?? '');
 
   const pieData = Object.keys(categoryBreakdown).map(key => ({
-    name: key,
+    name: getCategoryLabel(key),
     value: categoryBreakdown[key]
   }));
 
   const COLORS = ['#ccff00', '#ff0099', '#00ffff', '#ffcc00', '#121212', '#ffffff'];
 
-  // Trend Data (Last 7 days)
-  const trendData = [...Array(7)].map((_, i) => {
-    const d = new Date();
-    d.setDate(d.getDate() - (6 - i));
-    const dateStr = d.toISOString().split('T')[0];
-    const dayTotal = validExpenses
-      .filter(e => e.date.split('T')[0] === dateStr)
-      .reduce((sum, e) => sum + e.amount, 0);
-    return { name: dateStr.split('-').slice(1).join('/'), amount: dayTotal };
-  });
+  // Trend Data (Monthly). Falls back to last 7 days if summary isn't available.
+  const trendData = Array.isArray(summary?.monthlyTrend)
+    ? summary.monthlyTrend.map((d) => ({ name: d.label, amount: d.amount }))
+    : [...Array(7)].map((_, i) => {
+        const d = new Date();
+        d.setDate(d.getDate() - (6 - i));
+        const dateStr = d.toISOString().split('T')[0];
+        const dayTotal = validExpenses
+          .filter(e => e.date.split('T')[0] === dateStr)
+          .reduce((sum, e) => sum + e.amount, 0);
+        return { name: dateStr.split('-').slice(1).join('/'), amount: dayTotal };
+      });
 
   // Top Wasteful Categories
   const wastefulCategories = Object.entries(categoryBreakdown)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 3);
+
+  const topExpensesData = Array.isArray(summary?.topExpenses)
+    ? summary.topExpenses.map((e) => ({
+        name: String(e?.title ?? 'Expense').slice(0, 18),
+        amount: Number(e?.amount) || 0,
+      }))
+    : [];
 
   return (
     <div className="space-y-10 pb-20">
@@ -116,7 +143,14 @@ const Dashboard = () => {
       {/* NEW: Financial Intelligence Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <FinancialHealthCard healthData={healthData} loading={loading} />
-        <BudgetPredictionCard prediction={prediction} loading={loading} />
+        <BudgetPredictionCard 
+          prediction={prediction ? { 
+            ...prediction, 
+            balance: budget ? (budget - totalSpent) : 0,
+            avgDailySpend: totalSpent / Math.max(1, new Date().getDate())
+          } : null} 
+          loading={loading} 
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -166,11 +200,11 @@ const Dashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Spending Trend Graph */}
         <motion.div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_black]">
           <h2 className="text-xl font-black uppercase mb-6 flex items-center gap-2">
-            <TrendingDown className="text-blue-500" /> Spending Trend (7 Days)
+            <TrendingDown className="text-blue-500" /> Monthly Trend (Last 6 Months)
           </h2>
           <div className="h-[250px] w-full">
             <ResponsiveContainer width="100%" height="100%" minWidth={0}>
@@ -198,18 +232,42 @@ const Dashboard = () => {
                 </div>
                 <div className="flex-grow">
                   <div className="flex justify-between mb-1">
-                    <span className="font-bold uppercase text-sm">{cat}</span>
+                    <span className="font-bold uppercase text-sm">{getCategoryLabel(cat)}</span>
                     <span className="font-black tracking-tighter">₹{amt.toLocaleString()}</span>
                   </div>
                   <div className="w-full h-3 border-2 border-black bg-gray-100">
                     <div 
                       className="h-full bg-wrapped-pink" 
-                      style={{ width: `${(amt / totalSpent) * 100}%` }}
+                      style={{ width: totalSpent > 0 ? `${(amt / totalSpent) * 100}%` : '0%' }}
                     ></div>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Top Expenses */}
+        <motion.div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_black]">
+          <h2 className="text-xl font-black uppercase mb-6 flex items-center gap-2">
+            <Wallet className="text-black" /> Top Expenses
+          </h2>
+          <div className="h-[250px] w-full">
+            {topExpensesData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+                <BarChart data={topExpensesData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
+                  <XAxis dataKey="name" stroke="#000" tick={{ fontSize: 10, fontWeight: 'bold' }} />
+                  <YAxis stroke="#000" tick={{ fontSize: 10, fontWeight: 'bold' }} />
+                  <Tooltip contentStyle={{ border: '2px solid black', borderRadius: '0', fontWeight: 'bold' }} />
+                  <Bar dataKey="amount" radius={[0, 0, 0, 0]} fill="#ff0099" />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-full flex items-center justify-center font-bold uppercase text-gray-400 border-4 border-dashed border-gray-100">
+                No Data
+              </div>
+            )}
           </div>
         </motion.div>
       </div>

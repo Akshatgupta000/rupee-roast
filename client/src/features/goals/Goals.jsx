@@ -17,7 +17,7 @@ const Goals = () => {
   const fetchGoals = async () => {
     try {
       const res = await api.get('/goals');
-      setGoals(res.data);
+      setGoals(res.data?.data || []);
     } catch (err) {
       console.error(err);
     }
@@ -32,7 +32,7 @@ const Goals = () => {
         targetAmount: Number(newGoal.targetAmount),
         deadline: Number(newGoal.deadline)
       });
-      setGoals([res.data, ...goals]);
+      setGoals([res.data?.data, ...goals]);
       setNewGoal({ title: '', targetAmount: '', deadline: '' });
       setShowForm(false);
     } catch (err) {
@@ -47,7 +47,7 @@ const Goals = () => {
         amount
       });
       
-      setGoals(goals.map(g => g._id === goalId ? res.data : g));
+      setGoals(goals.map(g => g._id === goalId ? res.data?.data : g));
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || 'Error saving money');

@@ -1,22 +1,78 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lightbulb, Flame, ArrowRight, Loader } from 'lucide-react';
 import api from '../../services/api';
+import RoastCard from './RoastCard';
 
 const AIAdvicePanel = () => {
-  const [advice, setAdvice] = useState(null);
+  const [roastData, setRoastData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [meta, setMeta] = useState({ cached: false, fallbackUsed: false });
+  const [healthScore, setHealthScore] = useState(null);
+  const [loadingText, setLoadingText] = useState('');
+
+  const roastModes = [
+    { id: 'chill', label: 'Chill Friend 😄' },
+    { id: 'savage', label: 'Savage Dost 🔥' },
+    { id: 'mom', label: 'Indian Mom Mode 👩‍👦' },
+    { id: 'ca', label: 'CA Uncle Mode 📊' },
+  ];
+
+  const [roastMode, setRoastMode] = useState(() => {
+    try {
+      return localStorage.getItem('roastMode') || 'chill';
+    } catch (e) {
+      return 'chill';
+    }
+  });
+
+  const roastLoadingMessages = [
+    'AI tumhari financial life ka postmortem kar rahi hai...',
+    'Roast chef data paka raha hai...',
+    'Tumhare wallet ko thoda reality dikhaya ja raha hai...',
+  ];
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('roastMode', roastMode);
+    } catch (e) {
+      // Ignore storage failures.
+    }
+  }, [roastMode]);
+
+  useEffect(() => {
+    const fetchHealthScore = async () => {
+      try {
+        const res = await api.get('/finance/health-score');
+        setHealthScore(res?.data?.data?.score ?? null);
+      } catch (e) {
+        // Best-effort: panel works even without score.
+      }
+    };
+
+    fetchHealthScore();
+  }, []);
 
   const fetchAdvice = async () => {
     if (loading) return;
+    const pickLoadingText =
+      roastLoadingMessages[Math.floor(Math.random() * roastLoadingMessages.length)];
+
     setLoading(true);
     setError('');
+    setRoastData(null);
+    setMeta({ cached: false, fallbackUsed: false });
+    setLoadingText(pickLoadingText);
     try {
-      const res = await api.post('/roast');
-      const data = res?.data;
-      if (!data?.roast) throw new Error('No advice received from AI.');
-      setAdvice(data);
+      const res = await api.post('/roast/generate', { roastMode, forceRefresh: true });
+      const payload = res?.data?.data || res?.data;
+
+      if (!payload?.roast || !payload?.insight || !payload?.suggestion) {
+        throw new Error('AI response missing required fields (roast/insight/suggestion).');
+      }
+      setRoastData(payload);
+      setMeta({ cached: Boolean(res?.data?.cached), fallbackUsed: Boolean(res?.data?.fallbackUsed) });
     } catch (err) {
       const status = err?.response?.status;
       if (status === 429) {
@@ -26,6 +82,7 @@ const AIAdvicePanel = () => {
       } else {
         setError('Could not fetch AI advice. Try again later.');
       }
+      setRoastData(null);
     } finally {
       setLoading(false);
     }
@@ -37,25 +94,46 @@ const AIAdvicePanel = () => {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full"
     >
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-black uppercase tracking-tighter text-black flex items-center gap-2">
-          <Flame className="text-red-500" /> AI Financial Roast
-        </h2>
-        <button
-          onClick={fetchAdvice}
-          disabled={loading}
-          className="flex items-center gap-2 bg-black text-white px-4 py-2 font-black uppercase text-sm border-2 border-black shadow-[3px_3px_0px_0px_rgba(255,0,153,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? (
-            <>
-              <Loader size={14} className="animate-spin" /> Roasting...
-            </>
-          ) : (
-            <>
-              Roast Me <ArrowRight size={14} />
-            </>
-          )}
-        </button>
+      <div className="mb-4 flex flex-col gap-3">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-2xl font-black uppercase tracking-tighter text-black flex items-center gap-2">
+            <Flame className="text-red-500" /> AI Financial Roast
+          </h2>
+
+          <button
+            onClick={fetchAdvice}
+            disabled={loading}
+            className="flex items-center gap-2 bg-black text-white px-4 py-2 font-black uppercase text-sm border-2 border-black shadow-[3px_3px_0px_0px_rgba(255,0,153,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <Loader size={14} className="animate-spin" /> Roast chal raha hai...
+              </>
+            ) : (
+              <>
+                Sach sunne ki himmat hai? <ArrowRight size={14} />
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="font-black uppercase text-xs bg-wrapped-yellow border-2 border-black px-3 py-2 shadow-hard">
+            Roast Mode
+          </div>
+          <select
+            value={roastMode}
+            onChange={(e) => setRoastMode(e.target.value)}
+            className="bg-black text-white border-2 border-black px-3 py-2 font-black uppercase tracking-tighter text-xs flex-grow"
+            title="Same wallet. Different tone."
+          >
+            {roastModes.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {error && (
@@ -65,7 +143,7 @@ const AIAdvicePanel = () => {
       )}
 
       <AnimatePresence mode="wait">
-        {!advice && !loading && !error && (
+        {!roastData && !loading && !error && (
           <motion.div
             key="placeholder"
             initial={{ opacity: 0 }}
@@ -77,37 +155,51 @@ const AIAdvicePanel = () => {
               <Lightbulb size={40} className="text-black" />
             </div>
             <p className="font-black uppercase text-sm text-gray-500">
-              Click "Roast Me" to get AI-powered financial feedback based on your spending habits.
+              Mode choose karo, phir roast karwao. Wallet ko drama pasand hai.
             </p>
           </motion.div>
         )}
 
-        {advice && (
+        {loading && !error && (
           <motion.div
-            key="advice"
+            key="loading"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             className="space-y-4"
           >
-            <div className="bg-wrapped-pink/10 border-l-4 border-wrapped-pink p-4">
-              <p className="text-xs font-black uppercase text-gray-500 mb-1">🔥 The Roast</p>
-              <p className="font-black text-black text-lg leading-snug">"{advice.roast}"</p>
+            <div className="text-xs font-bold uppercase bg-black text-white border-2 border-black px-3 py-2 shadow-hard inline-flex items-center gap-2">
+              <span>🔥</span> {loadingText || 'Roast chef data paka raha hai...'}
             </div>
 
-            {advice.advice && (
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
-                <p className="text-xs font-black uppercase text-gray-500 mb-1">💡 Advice</p>
-                <p className="font-bold text-black text-sm">{advice.advice}</p>
-              </div>
-            )}
+            <div className="bg-wrapped-pink/10 border-l-4 border-wrapped-pink p-4">
+              <div className="h-4 w-3/4 bg-gray-200 animate-pulse mb-2" />
+              <div className="h-10 w-full bg-gray-200 animate-pulse" />
+            </div>
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
+              <div className="h-4 w-1/2 bg-gray-200 animate-pulse mb-2" />
+              <div className="h-6 w-full bg-gray-200 animate-pulse" />
+            </div>
+            <div className="bg-green-50 border-l-4 border-green-500 p-4">
+              <div className="h-4 w-1/3 bg-gray-200 animate-pulse mb-2" />
+              <div className="h-6 w-full bg-gray-200 animate-pulse" />
+            </div>
+          </motion.div>
+        )}
 
-            {advice.suggestion && (
-              <div className="bg-green-50 border-l-4 border-green-500 p-4">
-                <p className="text-xs font-black uppercase text-gray-500 mb-1">✅ Fix It</p>
-                <p className="font-bold text-black text-sm">{advice.suggestion}</p>
-              </div>
-            )}
+        {roastData && !loading && (
+          <motion.div
+            key="roastData"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            <RoastCard
+              roastData={roastData}
+              meta={meta}
+              score={healthScore}
+              variant="mini"
+            />
           </motion.div>
         )}
       </AnimatePresence>

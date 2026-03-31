@@ -16,7 +16,7 @@ const Expenses = () => {
   const fetchExpenses = async () => {
     try {
       const res = await api.get('/expenses');
-      setExpenses(res.data);
+      setExpenses(res.data?.data || []);
     } catch (error) {
       console.error(error);
     } finally {
@@ -45,7 +45,15 @@ const Expenses = () => {
     }
   };
 
-  const categories = ['food', 'transport', 'shopping', 'entertainment', 'bills', 'grocery', 'other'];
+  const categories = [
+    { value: 'food', label: 'Pet Puja Fund 🍕' },
+    { value: 'transport', label: 'Traffic Tax 🚗' },
+    { value: 'shopping', label: 'Retail Therapy 🛍️' },
+    { value: 'entertainment', label: 'Monthly Paisa Drain 💸' },
+    { value: 'bills', label: 'Bill Board Chilla 🚨' },
+    { value: 'grocery', label: 'Ration Ransom 🥬' },
+    { value: 'other', label: 'Misc Money Mystery 🧩' },
+  ];
 
   if(loading) return (
     <div className="flex justify-center items-center h-64">
@@ -65,7 +73,7 @@ const Expenses = () => {
           onClick={() => setShowForm(!showForm)}
           className={`neo-btn flex items-center gap-2 ${showForm ? 'bg-white text-black' : 'bg-wrapped-lime text-black'} text-lg`}
         >
-          {showForm ? <><X size={20} className="text-black inline" /> Cancel</> : <><Plus size={20} className="text-black inline" /> Add Expense</>}
+          {showForm ? <><X size={20} className="text-black inline" /> Cancel</> : <><Plus size={20} className="text-black inline" /> Aur kitna uda diya?</>}
         </button>
       </div>
 
@@ -89,7 +97,11 @@ const Expenses = () => {
             <div>
               <label className="block text-sm font-black uppercase mb-1">Category</label>
               <select required className="w-full bg-wrapped-cyan border-[3px] border-black p-3 font-mono font-bold focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow uppercase appearance-none" value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})}>
-                {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                {categories.map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
