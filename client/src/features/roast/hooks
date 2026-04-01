@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import api from '../services/api';
+import api from '../../services/api';
 
 /**
  * Custom hook to handle AI roasts
@@ -27,7 +27,7 @@ export const useRoast = () => {
       setRoastData(payload);
     } catch (err) {
       console.error('Roast hook error:', err);
-      setError(err.message || 'Failed to generate roast. Please try again.');
+      setError(err instanceof Error ? err.message : 'Failed to generate roast. Please try again.');
     } finally {
       setLoading(false);
     }

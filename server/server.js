@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import connectDB from './src/config/db.js';
@@ -22,20 +23,44 @@ connectDB();
 
 const app = express();
 
-app.use(express.json());
+// ─── 1. CORS — MUST come before express.json() so preflight OPTIONS requests
+//     are handled before any body parsing occurs. ────────────────────────────
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.CLIENT_URL
+];
 
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://rupee-roast.vercel.app'
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
-}));
+};
 
-app.options("*", cors());
+app.use(cors(corsOptions));
+app.options("/{*splat}", cors(corsOptions));
 
-// Routes
+// ─── 2. Body Parsing ──────────────────────────────────────────────────────
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ─── 3. Request Logger ────────────────────────────────────────────────────
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
+// ─── 4. Health Check ──────────────────────────────────────────────────────
+app.get("/api/health", (req, res) => {
+  res.json({ status: "OK" });
+});
+
+// ─── 5. API Routes ────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/goals', goalRoutes);
@@ -43,32 +68,17 @@ app.use('/api/roast', roastRoutes);
 app.use('/api/budget', budgetRoutes);
 app.use('/api/finance', financeRoutes);
 
-// Spec-friendly aliases
-app.use('/auth', authRoutes);
-app.use('/expenses', expenseRoutes);
-app.use('/goals', goalRoutes);
-app.use('/roast', roastRoutes);
-app.use('/budget', budgetRoutes);
-app.use('/finance', financeRoutes);
-
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK' });
-});
-
+// ─── 6. Root ──────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
   res.send('Rupee Roast API is running...');
 });
 
-// Global Error Handler
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({
-    message: "Internal Server Error"
-  });
-});
+// ─── 7. Global Error Handler (must be last) ───────────────────────────────
+app.use(errorMiddleware);
 
+// ─── 8. Start ─────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`[Backend] Server running on port ${PORT}`);
 });
+

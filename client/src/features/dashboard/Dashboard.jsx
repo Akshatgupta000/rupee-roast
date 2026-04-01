@@ -77,7 +77,7 @@ const Dashboard = () => {
   const currentMonth = new Date().getMonth();
   const currentMonthExpenses = validExpenses.filter(e => new Date(e.date).getMonth() === currentMonth);
   
-  const totalSpent = currentMonthExpenses.reduce((sum, e) => sum + e.amount, 0);
+  const totalSpent = summary?.totalMonthlySpending ?? currentMonthExpenses.reduce((sum, e) => sum + e.amount, 0);
   const impulsiveSpent = currentMonthExpenses.filter(e => e.type === 'impulsive').reduce((sum, e) => sum + e.amount, 0);
   const necessarySpent = currentMonthExpenses.filter(e => e.type === 'necessary').reduce((sum, e) => sum + e.amount, 0);
 

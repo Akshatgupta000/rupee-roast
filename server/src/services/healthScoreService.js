@@ -19,10 +19,10 @@ export const getFinancialHealthScore = async (userId) => {
     Goal.find({ user: userId, status: 'active' })
   ]);
 
-  const totalBudget = budget ? budget.monthlyBudget : 0;
-  const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const necessarySpent = expenses.filter(e => e.type === 'necessary').reduce((sum, e) => sum + e.amount, 0);
-  const impulsiveSpent = expenses.filter(e => e.type === 'impulsive').reduce((sum, e) => sum + e.amount, 0);
+  const totalBudget = budget ? (budget.monthlyBudget || 0) : 0;
+  const totalSpent = (expenses || []).reduce((sum, e) => sum + (e.amount || 0), 0);
+  const necessarySpent = (expenses || []).filter(e => e.type === 'necessary').reduce((sum, e) => sum + (e.amount || 0), 0);
+  const impulsiveSpent = (expenses || []).filter(e => e.type === 'impulsive').reduce((sum, e) => sum + (e.amount || 0), 0);
 
   // --- Factors ---
 
@@ -51,20 +51,25 @@ export const getFinancialHealthScore = async (userId) => {
 
   // D. Goal Progress (20%)
   let goalScore = 0;
-  if (goals.length > 0) {
-    const totalProgress = goals.reduce((acc, g) => acc + (g.savedAmount / g.targetAmount), 0);
+  if (goals && goals.length > 0) {
+    const totalProgress = goals.reduce((acc, g) => {
+      const target = g.targetAmount || 1; // prevent division by zero
+      return acc + ((g.savedAmount || 0) / target);
+    }, 0);
     goalScore = (totalProgress / goals.length) * 100;
   } else {
-    goalScore = 50; // Neutral if no goals
+    goalScore = 50; // Neutral if no goals set
   }
+  if (isNaN(goalScore) || !isFinite(goalScore)) goalScore = 0;
 
   // --- Weighted Total ---
-  const score = Math.round(
+  let score = Math.round(
     (savingsScore * 0.40) +
     (consistencyScore * 0.20) +
     (luxuryScore * 0.20) +
     (goalScore * 0.20)
   );
+  if (isNaN(score)) score = 0; // final safety net
 
   let status = "Poor";
   let message = "Your financial health is in critical condition.";

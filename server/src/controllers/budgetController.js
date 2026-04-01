@@ -9,7 +9,7 @@ export const setBudget = async (req, res) => {
     }
 
     const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1;
+    const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
 
     let budget = await Budget.findOne({
@@ -39,7 +39,7 @@ export const setBudget = async (req, res) => {
 export const getCurrentBudget = async (req, res) => {
   try {
     const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1;
+    const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
 
     const budget = await Budget.findOne({
