@@ -25,8 +25,8 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-background relative uppercase tracking-tight">
-      <div className="absolute top-1/3 right-10 w-32 h-32 bg-wrapped-lime border-4 border-black rounded-full shadow-hard animate-wobble mix-blend-multiply" />
-      <div className="absolute bottom-1/4 left-10 w-48 h-48 bg-wrapped-yellow border-4 border-black shadow-hard mix-blend-multiply rotate-6" />
+      <div className="absolute top-1/3 right-10 w-32 h-32 bg-wrapped-lime border-4 border-black rounded-full shadow-hard animate-wobble mix-blend-multiply hidden md:block" />
+      <div className="absolute bottom-1/4 left-10 w-48 h-48 bg-wrapped-yellow border-4 border-black shadow-hard mix-blend-multiply rotate-6 hidden md:block" />
       
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -34,7 +34,7 @@ const Signup = () => {
         className="neo-card w-full max-w-md p-8 md:p-10 z-10 bg-white"
       >
         <div className="text-center border-b-4 border-black pb-6 mb-8">
-          <h2 className="text-4xl font-black mb-2 font-heading">Create Account</h2>
+          <h2 className="text-3xl md:text-4xl font-black mb-2 font-heading">Create Account</h2>
           <p className="font-mono font-bold bg-wrapped-cyan inline-block px-2 py-1 border-2 border-black">Start your journey to self-awareness.</p>
         </div>
 

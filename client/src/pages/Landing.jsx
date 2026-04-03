@@ -4,7 +4,7 @@ import { Flame, Target, TrendingUp, ArrowRight } from 'lucide-react';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen bg-background text-black flex flex-col items-center justify-center p-6 lg:p-12 overflow-hidden relative selection:bg-wrapped-lime selection:text-black">
+    <div className="min-h-screen bg-background text-black flex flex-col items-center justify-center p-4 md:p-12 overflow-x-hidden relative selection:bg-wrapped-lime selection:text-black">
       
       {/* Background decoration */}
       <div className="absolute top-10 left-10 w-32 h-32 bg-wrapped-cyan rounded-full border-[3px] border-black shadow-hard animate-wobble opacity-50 hidden md:block" />
@@ -21,15 +21,15 @@ const Landing = () => {
           <Flame size={32} className="text-black" />
         </div>
 
-        <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase font-heading text-stroke-1 leading-none">
-          Welcome to <span className="bg-wrapped-pink text-white px-4 border-4 border-black inline-block mt-4 -rotate-2 hover:rotate-2 transition-transform shadow-hard">RupeeRoast</span>
+        <h1 className="text-4xl md:text-8xl font-black mb-6 tracking-tighter uppercase font-heading text-stroke-1 leading-none">
+          Welcome to <span className="bg-wrapped-pink text-white px-2 md:px-4 border-4 border-black inline-block mt-4 -rotate-2 hover:rotate-2 transition-transform shadow-hard">RupeeRoast</span>
         </h1>
         
         <p className="font-mono text-xl md:text-2xl font-bold bg-wrapped-yellow inline-block px-4 py-2 border-2 border-black mb-8 shadow-hard">
           "Delulu is not the solulu. Data is."
         </p>
         
-        <p className="text-xl font-bold mb-10 max-w-2xl mx-auto border-l-4 border-black pl-4 text-left">
+        <p className="text-lg md:text-xl font-bold mb-10 max-w-2xl mx-auto border-l-4 border-black pl-4 text-left">
           Track expenses, set savings goals, and get brutally roasted by our AI Indian Dad for your terrible financial decisions. 
         </p>
 

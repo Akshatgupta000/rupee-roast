@@ -64,11 +64,11 @@ const GoalCard = ({ goal, onSave, onUpdate }) => {
       className="bg-white p-6 border-4 border-black shadow-[6px_6px_0px_black] text-black relative"
     >
       <div className="flex justify-between items-start mb-4">
-        <div>
-          <h3 className="text-2xl font-black uppercase flex items-center gap-2">
-            <Target size={24} /> {goal.title}
+        <div className="flex-1">
+          <h3 className="text-xl md:text-2xl font-black uppercase flex items-center gap-2">
+            <Target size={20} className="md:w-6 md:h-6" /> {goal.title}
           </h3>
-          <p className="font-bold opacity-80 mt-1">Deadline: {goal.deadline} months left</p>
+          <p className="font-bold opacity-80 mt-1 text-xs md:text-base">Deadline: {goal.deadline} months left</p>
         </div>
         {goal.status === 'completed' && (
           <span className="bg-[#a3e635] text-black px-3 py-1 font-black uppercase border-2 border-black flex items-center gap-1 shadow-[2px_2px_0px_black]">
@@ -80,17 +80,17 @@ const GoalCard = ({ goal, onSave, onUpdate }) => {
       <GoalProgress saved={goal.savedAmount} target={goal.targetAmount} />
 
       {goal.status !== 'completed' && (
-        <form onSubmit={handleSave} className="mt-4 flex gap-2">
+        <form onSubmit={handleSave} className="mt-4 flex flex-col sm:flex-row gap-2">
           <input 
             type="number" 
             placeholder="Amount to save" 
             value={saveAmount}
             onChange={(e) => setSaveAmount(e.target.value)}
-            className="flex-1 border-2 border-black p-2 font-bold focus:outline-none focus:bg-pink-100"
+            className="flex-1 border-2 border-black p-2 font-bold focus:outline-none focus:bg-pink-100 text-sm md:text-base"
           />
           <button 
             type="submit"
-            className="bg-[#fbbf24] px-4 font-black border-2 border-black shadow-[2px_2px_0px_black] hover:translate-y-px hover:shadow-none transition-all uppercase"
+            className="bg-[#fbbf24] px-4 py-2 sm:py-0 font-black border-2 border-black shadow-[2px_2px_0px_black] hover:translate-y-px hover:shadow-none transition-all uppercase text-sm md:text-base"
           >
             Add
           </button>

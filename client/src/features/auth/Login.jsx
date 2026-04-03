@@ -24,8 +24,8 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-background relative uppercase tracking-tight">
-      <div className="absolute top-20 left-20 w-48 h-48 bg-wrapped-pink border-4 border-black rounded-full shadow-hard animate-wobble mix-blend-multiply" />
-      <div className="absolute bottom-20 right-20 w-64 h-64 bg-wrapped-cyan border-4 border-black shadow-hard mix-blend-multiply flex items-center justify-center font-black text-6xl rotate-12">!</div>
+      <div className="absolute top-20 left-20 w-48 h-48 bg-wrapped-pink border-4 border-black rounded-full shadow-hard animate-wobble mix-blend-multiply hidden md:block" />
+      <div className="absolute bottom-20 right-20 w-64 h-64 bg-wrapped-cyan border-4 border-black shadow-hard mix-blend-multiply flex items-center justify-center font-black text-6xl rotate-12 hidden md:block" />
       
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ const Login = () => {
         className="neo-card w-full max-w-md p-8 md:p-10 z-10 bg-white"
       >
         <div className="text-center border-b-4 border-black pb-6 mb-8">
-          <h2 className="text-4xl font-black mb-2 font-heading">Welcome Back</h2>
+          <h2 className="text-2xl md:text-4xl font-black mb-2 font-heading">Welcome Back</h2>
           <p className="font-mono font-bold bg-wrapped-yellow inline-block px-2 py-1 border-2 border-black">Log in to face your financial reality.</p>
         </div>
 

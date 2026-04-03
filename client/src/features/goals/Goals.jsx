@@ -55,14 +55,14 @@ const Goals = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto min-h-screen bg-[#f3f4f6]">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-black uppercase text-black tracking-tighter shadow-black drop-shadow-[4px_4px_0px_white]">
+    <div className="p-0 md:p-4 max-w-7xl mx-auto min-h-screen">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+        <h1 className="text-3xl md:text-5xl font-black uppercase text-black tracking-tighter shadow-black drop-shadow-[4px_4px_0px_white]">
           Saving Goals
         </h1>
         <button 
           onClick={() => setShowForm(!showForm)}
-          className="bg-black text-white px-6 py-3 font-black flex items-center gap-2 hover:bg-white hover:text-black border-4 border-black hover:-translate-y-1 hover:shadow-[6px_6px_0px_black] transition-all uppercase"
+          className="bg-black text-white px-4 md:px-6 py-3 font-black flex items-center justify-center gap-2 hover:bg-white hover:text-black border-4 border-black hover:-translate-y-1 hover:shadow-[6px_6px_0px_black] transition-all uppercase w-full sm:w-auto"
         >
           <PlusSquare size={24} /> New Goal
         </button>

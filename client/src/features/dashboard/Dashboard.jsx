@@ -135,9 +135,9 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-10 pb-20">
-      <header className="mb-8 border-b-4 border-black pb-4 inline-block">
-        <h1 className="text-5xl font-black text-black mb-2 uppercase tracking-tighter shadow-hard-white inline-block bg-wrapped-cyan px-4 py-2 border-4 border-black">Intelligence</h1>
-        <p className="font-mono font-bold bg-white px-2 py-1 border-2 border-black inline-block mt-4 ml-4 translate-y-[-10px] rotate-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Predicting your financial doom.</p>
+      <header className="mb-4 md:mb-8 border-b-4 border-black pb-4 inline-block w-full sm:w-auto">
+        <h1 className="text-3xl md:text-5xl font-black text-black mb-2 uppercase tracking-tighter shadow-hard-white inline-block bg-wrapped-cyan px-4 py-2 border-4 border-black">Intelligence</h1>
+        <p className="font-mono font-bold bg-white px-2 py-1 border-2 border-black inline-block mt-2 md:mt-4 md:ml-4 translate-y-0 md:translate-y-[-10px] rotate-0 md:rotate-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-xs md:text-base">Predicting your financial doom.</p>
       </header>
 
       {/* NEW: Financial Intelligence Row */}
@@ -165,11 +165,11 @@ const Dashboard = () => {
         <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} className="neo-card p-6 bg-wrapped-lime border-4 border-black shadow-[8px_8px_0px_black]">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="font-black text-xs uppercase mb-2">Total Monthly Spend</p>
-              <h3 className="text-4xl font-black">₹{totalSpent.toLocaleString()}</h3>
+              <p className="font-black text-[10px] md:text-xs uppercase mb-1 md:mb-2">Total Monthly Spend</p>
+              <h3 className="text-2xl md:text-4xl font-black tracking-tight">₹{totalSpent.toLocaleString()}</h3>
             </div>
-            <div className="bg-white p-2 border-2 border-black">
-              <IndianRupee size={24} />
+            <div className="bg-white p-1 md:p-2 border-2 border-black">
+              <IndianRupee size={20} className="md:w-6 md:h-6" />
             </div>
           </div>
         </motion.div>
@@ -177,11 +177,11 @@ const Dashboard = () => {
         <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay: 0.1 }} className="neo-card p-6 bg-wrapped-cyan border-4 border-black shadow-[8px_8px_0px_black]">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="font-black text-xs uppercase mb-2">Essential Spending</p>
-              <h3 className="text-4xl font-black">₹{necessarySpent.toLocaleString()}</h3>
+              <p className="font-black text-[10px] md:text-xs uppercase mb-1 md:mb-2">Essential Spending</p>
+              <h3 className="text-2xl md:text-4xl font-black tracking-tight">₹{necessarySpent.toLocaleString()}</h3>
             </div>
-            <div className="bg-white p-2 border-2 border-black">
-              <TrendingDown size={24} />
+            <div className="bg-white p-1 md:p-2 border-2 border-black">
+              <TrendingDown size={20} className="md:w-6 md:h-6" />
             </div>
           </div>
         </motion.div>
@@ -189,11 +189,11 @@ const Dashboard = () => {
         <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay: 0.2 }} className="neo-card p-6 bg-wrapped-pink border-4 border-black shadow-[8px_8px_0px_black]">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="font-black text-xs uppercase mb-2">Impulsive Damage</p>
-              <h3 className="text-4xl font-black text-white text-stroke-1">₹{impulsiveSpent.toLocaleString()}</h3>
+              <p className="font-black text-[10px] md:text-xs uppercase mb-1 md:mb-2">Impulsive Damage</p>
+              <h3 className="text-2xl md:text-4xl font-black text-white text-stroke-1 tracking-tight">₹{impulsiveSpent.toLocaleString()}</h3>
             </div>
-            <div className="bg-white p-2 border-2 border-black">
-              <AlertTriangle size={24} />
+            <div className="bg-white p-1 md:p-2 border-2 border-black">
+              <AlertTriangle size={20} className="md:w-6 md:h-6" />
             </div>
           </div>
         </motion.div>

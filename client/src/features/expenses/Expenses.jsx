@@ -63,15 +63,15 @@ const Expenses = () => {
 
   return (
     <div className="space-y-10 pb-20">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
-        <header className="border-b-4 border-black pb-4 inline-block">
-          <h1 className="text-5xl font-black text-white mb-2 uppercase tracking-tighter text-stroke-1 inline-block bg-wrapped-pink px-4 py-2 border-4 border-black shadow-hard-white">Expenses</h1>
-          <p className="font-mono font-bold bg-white px-2 py-1 border-2 border-black inline-block mt-4 ml-4 translate-y-[-10px] -rotate-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Manage all your spending in one place.</p>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+        <header className="border-b-4 border-black pb-4 inline-block w-full sm:w-auto">
+          <h1 className="text-3xl md:text-5xl font-black text-white mb-2 uppercase tracking-tighter text-stroke-1 inline-block bg-wrapped-pink px-4 py-2 border-4 border-black shadow-hard-white">Expenses</h1>
+          <p className="font-mono font-bold bg-white px-2 py-1 border-2 border-black inline-block mt-4 md:ml-4 translate-y-0 md:translate-y-[-10px] rotate-0 md:-rotate-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-xs md:text-base">Manage all your spending in one place.</p>
         </header>
 
         <button 
           onClick={() => setShowForm(!showForm)}
-          className={`neo-btn flex items-center gap-2 ${showForm ? 'bg-white text-black' : 'bg-wrapped-lime text-black'} text-lg`}
+          className={`neo-btn flex items-center justify-center gap-2 w-full md:w-auto ${showForm ? 'bg-white text-black' : 'bg-wrapped-lime text-black'} text-lg`}
         >
           {showForm ? <><X size={20} className="text-black inline" /> Cancel</> : <><Plus size={20} className="text-black inline" /> Aur kitna uda diya?</>}
         </button>
@@ -122,46 +122,84 @@ const Expenses = () => {
         <div className="bg-wrapped-black text-white p-4 border-b-4 border-black">
           <h2 className="text-2xl font-black uppercase tracking-tight">All Transactions</h2>
         </div>
-        <div className="overflow-x-auto p-4 md:p-6 bg-surface">
-          <table className="w-full text-left border-collapse border-[3px] border-black bg-white shadow-hard mb-2">
-            <thead className="bg-wrapped-cyan">
-              <tr className="border-b-[3px] border-black text-black font-black uppercase font-mono text-sm">
-                <th className="p-4 border-r-[3px] border-black">Date</th>
-                <th className="p-4 border-r-[3px] border-black">Title</th>
-                <th className="p-4 border-r-[3px] border-black">Category</th>
-                <th className="p-4 border-r-[3px] border-black">Type</th>
-                <th className="p-4 border-r-[3px] border-black text-right">Amount</th>
-                <th className="p-4 text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(Array.isArray(expenses) ? expenses : []).map(expense => (
-                <tr key={expense._id} className="border-b-[3px] border-black hover:bg-gray-100 transition-colors group">
-                  <td className="p-4 font-mono font-bold border-r-[3px] border-black">{new Date(expense.date).toLocaleDateString()}</td>
-                  <td className="p-4 font-bold border-r-[3px] border-black uppercase">{expense.title}</td>
-                  <td className="p-4 font-mono font-bold border-r-[3px] border-black uppercase">{expense.category}</td>
-                  <td className="p-4 border-r-[3px] border-black">
-                    <span className={`px-3 py-1 text-xs font-black uppercase border-2 border-black inline-block shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${expense.type === 'impulsive' ? 'bg-wrapped-pink text-white' : 'bg-wrapped-lime text-black'}`}>
+        <div className="p-4 md:p-6 bg-surface">
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full text-left border-collapse border-[3px] border-black bg-white shadow-hard mb-2">
+              <thead className="bg-wrapped-cyan">
+                <tr className="border-b-[3px] border-black text-black font-black uppercase font-mono text-sm">
+                  <th className="p-4 border-r-[3px] border-black">Date</th>
+                  <th className="p-4 border-r-[3px] border-black">Title</th>
+                  <th className="p-4 border-r-[3px] border-black">Category</th>
+                  <th className="p-4 border-r-[3px] border-black">Type</th>
+                  <th className="p-4 border-r-[3px] border-black text-right">Amount</th>
+                  <th className="p-4 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(Array.isArray(expenses) ? expenses : []).map(expense => (
+                  <tr key={expense._id} className="border-b-[3px] border-black hover:bg-gray-100 transition-colors group">
+                    <td className="p-4 font-mono font-bold border-r-[3px] border-black">{new Date(expense.date).toLocaleDateString()}</td>
+                    <td className="p-4 font-bold border-r-[3px] border-black uppercase">{expense.title}</td>
+                    <td className="p-4 font-mono font-bold border-r-[3px] border-black uppercase">{expense.category}</td>
+                    <td className="p-4 border-r-[3px] border-black">
+                      <span className={`px-3 py-1 text-xs font-black uppercase border-2 border-black inline-block shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${expense.type === 'impulsive' ? 'bg-wrapped-pink text-white' : 'bg-wrapped-lime text-black'}`}>
+                        {expense.type}
+                      </span>
+                    </td>
+                    <td className="p-4 text-right font-black text-xl border-r-[3px] border-black">
+                      ₹{expense.amount.toLocaleString()}
+                    </td>
+                    <td className="p-4 text-center">
+                      <button onClick={() => deleteExpense(expense._id)} className="bg-white border-2 border-black p-2 hover:bg-wrapped-pink hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                        <Trash2 size={20} className="inline" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {(Array.isArray(expenses) ? expenses : []).length === 0 && (
+                  <tr>
+                    <td colSpan="6" className="p-10 text-center font-mono font-bold uppercase text-gray-500 bg-white">No expenses found. Start tracking!</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-4">
+            {(Array.isArray(expenses) ? expenses : []).map(expense => (
+              <div key={expense._id} className="bg-white border-[3px] border-black p-4 shadow-hard">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="max-w-[60%]">
+                    <p className="font-mono text-[10px] font-bold text-gray-400 mb-1">{new Date(expense.date).toLocaleDateString()}</p>
+                    <h3 className="font-black uppercase text-base truncate">{expense.title}</h3>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-black text-xl">₹{expense.amount.toLocaleString()}</p>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                  <div className="flex gap-2">
+                    <span className="px-2 py-0.5 text-[10px] font-black uppercase border-2 border-black bg-wrapped-cyan">
+                      {expense.category}
+                    </span>
+                    <span className={`px-2 py-0.5 text-[10px] font-black uppercase border-2 border-black ${expense.type === 'impulsive' ? 'bg-wrapped-pink text-white' : 'bg-wrapped-lime text-black'}`}>
                       {expense.type}
                     </span>
-                  </td>
-                  <td className="p-4 text-right font-black text-xl border-r-[3px] border-black">
-                    ₹{expense.amount.toLocaleString()}
-                  </td>
-                  <td className="p-4 text-center">
-                    <button onClick={() => deleteExpense(expense._id)} className="bg-white border-2 border-black p-2 hover:bg-wrapped-pink hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
-                      <Trash2 size={20} className="inline" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {(Array.isArray(expenses) ? expenses : []).length === 0 && (
-                <tr>
-                  <td colSpan="6" className="p-10 text-center font-mono font-bold uppercase text-gray-500 bg-white">No expenses found. Start tracking!</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                  </div>
+                  <button onClick={() => deleteExpense(expense._id)} className="bg-white border-2 border-black p-2 hover:bg-wrapped-pink hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              </div>
+            ))}
+            {(Array.isArray(expenses) ? expenses : []).length === 0 && (
+              <div className="p-8 text-center font-mono font-bold uppercase text-gray-400 border-4 border-dashed border-gray-200">
+                No expenses found.
+              </div>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>
