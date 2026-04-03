@@ -53,7 +53,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    // Clear all authentication-related data safely
     localStorage.removeItem('user');
+    sessionStorage.clear();
     setUser(null);
   };
 

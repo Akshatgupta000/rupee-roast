@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
   
   if (loading) return <div className="min-h-screen bg-background text-white flex items-center justify-center">Loading...</div>;
-  if (!user) return <Navigate to="/login" />;
+  if (!user) return <Navigate to="/login" replace />;
   
   return children;
 };
@@ -25,7 +25,7 @@ const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth();
   
   if (loading) return <div className="min-h-screen bg-background text-white flex items-center justify-center">Loading...</div>;
-  if (user) return <Navigate to="/dashboard" />;
+  if (user) return <Navigate to="/dashboard" replace />;
   
   return children;
 };
