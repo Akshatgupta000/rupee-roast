@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+import { rateLimit, ipKeyGenerator } from 'express-rate-limit';
 
 /**
  * Rate limit AI calls: max 5 per minute per user.
@@ -9,10 +9,10 @@ export const aiRateLimiter = rateLimit({
   max: 5,
   standardHeaders: true,
   legacyHeaders: false,
-  keyGenerator: (req) => {
+  keyGenerator: (req, res) => {
     // All AI endpoints are JWT-protected; rate limit strictly by user id.
-    // Avoid using req.ip to prevent IPv6 bypass warnings from express-rate-limit.
-    return req.user?.id ? String(req.user.id) : 'anonymous';
+    // Use the official ipKeyGenerator to avoid IPv6 bypass warnings and properly identify IP.
+    return req.user?.id ? String(req.user.id) : ipKeyGenerator(req, res);
   },
   handler: (req, res) => {
     res.status(429).json({

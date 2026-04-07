@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lightbulb, Flame, ArrowRight, Loader } from 'lucide-react';
+import { Lightbulb, Flame, ArrowRight } from 'lucide-react';
 import api from '../../services/api';
 import RoastCard from './RoastCard';
 
@@ -99,22 +99,6 @@ const AIAdvicePanel = () => {
           <h2 className="text-2xl font-black uppercase tracking-tighter text-black flex items-center gap-2">
             <Flame className="text-red-500" /> AI Financial Roast
           </h2>
-
-          <button
-            onClick={fetchAdvice}
-            disabled={loading}
-            className="flex items-center gap-2 bg-black text-white px-4 py-2 font-black uppercase text-sm border-2 border-black shadow-[3px_3px_0px_0px_rgba(255,0,153,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? (
-              <>
-                <Loader size={14} className="animate-spin" /> Roast chal raha hai...
-              </>
-            ) : (
-              <>
-                Sach sunne ki himmat hai? <ArrowRight size={14} />
-              </>
-            )}
-          </button>
         </div>
 
         <div className="flex items-center gap-3">
@@ -146,17 +130,33 @@ const AIAdvicePanel = () => {
         {!roastData && !loading && !error && (
           <motion.div
             key="placeholder"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col items-center justify-center py-10 text-center gap-4"
+            className="flex flex-col items-center justify-center py-10 text-center"
           >
-            <div className="p-4 bg-wrapped-yellow border-2 border-black shadow-[4px_4px_0px_black]">
-              <Lightbulb size={40} className="text-black" />
-            </div>
-            <p className="font-black uppercase text-sm text-gray-500">
-              Mode choose karo, phir roast karwao. Wallet ko drama pasand hai.
-            </p>
+            <button
+              onClick={fetchAdvice}
+              disabled={loading}
+              className="group flex flex-col items-center gap-6 focus:outline-none transition-transform hover:scale-105"
+            >
+              <div className="p-6 bg-wrapped-yellow border-4 border-black shadow-[8px_8px_0px_black] group-hover:shadow-none group-hover:translate-x-[4px] group-hover:translate-y-[4px] transition-all">
+                <Lightbulb size={60} className="text-black" />
+              </div>
+              
+              <div className="space-y-3">
+                <h3 className="text-3xl font-black uppercase tracking-tighter text-black group-hover:text-wrapped-pink transition-colors">
+                  Sach sunne ki himmat hai? 🔥
+                </h3>
+                <p className="font-black uppercase text-xs text-gray-400 tracking-widest bg-gray-50 border border-gray-200 px-3 py-1">
+                  Mode choose karo, phir roast karwao. Wallet ko drama pasand hai.
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-2 text-black font-black uppercase text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+                Click to Roast Me <ArrowRight size={18} className="text-wrapped-pink" />
+              </div>
+            </button>
           </motion.div>
         )}
 
