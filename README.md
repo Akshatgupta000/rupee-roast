@@ -17,14 +17,6 @@
 
 ---
 
-## 📸 Demo / Preview
-
-<div align="center">
-  <img src="https://via.placeholder.com/800x450.png?text=Rupee+Roast+App+Screenshot" alt="Rupee Roast Preview" width="100%" />
-</div>
-
----
-
 ## ✨ Features
 
 - ⚡ **Fast Performance**: Optimized for speed, giving you instant financial insights.
