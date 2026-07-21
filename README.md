@@ -1,167 +1,185 @@
 <div align="center">
+  <h1>🔥 Rupee Roast</h1>
+  <p><strong>AI-Powered Personal Finance Platform</strong></p>
+  
+  [![React](https://img.shields.io/badge/React-19-blue.svg?logo=react)](https://react.dev)
+  [![Node.js](https://img.shields.io/badge/Node.js-Express-green.svg?logo=nodedotjs)](https://nodejs.org/)
+  [![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-green.svg?logo=mongodb)](https://mongodb.com)
+  [![Gemini AI](https://img.shields.io/badge/AI-Google_Gemini-blue.svg)](https://deepmind.google/technologies/gemini/)
+  
+  <p><em>Where smart budgeting meets AI-generated financial reality checks.</em></p>
 
-# 🔥 Rupee Roast
-
-**A hilarious AI-powered financial analyzer that roasts your spending habits with brutal honesty.**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/Akshatgupta000/rupee-roast)](https://github.com/Akshatgupta000/rupee-roast/stargazers)
-[![Forks](https://img.shields.io/github/forks/Akshatgupta000/rupee-roast)](https://github.com/Akshatgupta000/rupee-roast/network/members)
-[![Issues](https://img.shields.io/github/issues/Akshatgupta000/rupee-roast)](https://github.com/Akshatgupta000/rupee-roast/issues)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat&logo=mongodb&logoColor=white)
-
+  <!-- Placeholder for a high-quality product screenshot or banner -->
+  <br />
 </div>
 
----
+## 📖 Overview
 
-## 📸 Demo / Preview
+**Rupee Roast** is a full-stack personal finance management application that goes beyond traditional budgeting. It combines robust expense tracking, goal setting, and insightful analytics with an integrated **AI Financial Assistant**. Powered by Google's Gemini AI, the app analyzes user spending habits to deliver personalized financial insights, practical suggestions, and humorous "roasts" based on user-selected modes (e.g., chill, aggressive).
 
-<div align="center">
-  <img src="https://via.placeholder.com/800x450.png?text=Rupee+Roast+App+Screenshot" alt="Rupee Roast Preview" width="100%" />
-</div>
+Built with engineering maturity in mind, the platform features a responsive React frontend, a secure Node.js REST API, and a highly optimized MongoDB database layer implementing caching and fallback mechanisms for AI requests.
 
 ---
 
-## ✨ Features
+## ⚡ Core Capabilities
 
-- ⚡ **Fast Performance**: Optimized for speed, giving you instant financial insights.
-- 🔒 **Secure Authentication**: Built with best-in-class security to keep your data safe.
-- 🤖 **AI Integration**: Powered by Gemini AI with robust fail-safes and fallback responses.
-- 📱 **Responsive UI**: Beautifully designed interface that looks great on any device.
-- 🏗️ **Clean Architecture**: Modular and maintainable code base ready for production scaling.
+### 🤖 AI Financial Assistant
+- **Context-Aware Insights:** Analyzes current month spending, categorized expenses, and savings goals to generate personalized financial advice.
+- **Dynamic "Roast" Engine:** Offers customizable interaction modes (from gentle nudges to brutal reality checks) using the Gemini AI API.
+- **Resilient AI Pipeline:** Features custom rate-limiting retry logic and a deterministic local fallback system to ensure 100% uptime even if the LLM provider is unavailable.
+
+### 💰 Expense Management
+- **Transaction Tracking:** Full CRUD operations for expenses with categorization.
+- **Behavioral Tagging:** Classifies spending as *necessary* or *impulsive* to drive better financial habits.
+
+### 📊 Analytics & Dashboard
+- **Financial Overview:** A comprehensive dashboard displaying quick statistics, recent activity, and a custom financial health score.
+- **Data Visualization:** Interactive charts built with Recharts to visualize income vs. expenses, category distributions, and monthly trends.
+
+### 🎯 Goals & Savings
+- **Target Tracking:** Set, monitor, and update savings goals with deadline calculations and progress tracking.
+
+### 🔒 Authentication & Security
+- **Secure Access:** JWT-based stateless authentication and authorization for protected API routes.
+- **Data Protection:** Passwords securely hashed via `bcryptjs`.
+- **API Security:** Rate limiting (`express-rate-limit`) implemented on the backend to prevent abuse.
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗 Architecture & Tech Stack
 
-### Frontend
-- **React** - Component-based user interface
-- **Tailwind CSS** - Rapid utility-first styling
+### Frontend (Client)
+- **Framework:** React 19 (via Vite)
+- **Styling:** Tailwind CSS 3 for highly responsive, utility-first UI.
+- **Animations & Visuals:** Framer Motion for micro-interactions and Recharts for data visualization.
+- **Routing & Networking:** React Router DOM and Axios.
 
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Fast, unopinionated web framework
-
-### Database
-- **MongoDB** - NoSQL database for flexible and scalable storage
+### Backend (Server)
+- **Runtime:** Node.js with Express.js
+- **Database:** MongoDB (via Mongoose)
+- **AI Integration:** `@google/generative-ai` (gemini-1.5-flash)
+- **Security:** `jsonwebtoken`, `bcryptjs`, `cors`, `express-rate-limit`
 
 ---
 
-## 📂 Project Structure
+## 🧠 The AI Pipeline
 
-```text
-rupee-roast/
-│
-├── client/              # React frontend application
-├── server/              # Node.js + Express backend
-│   ├── routes/          # API route definitions
-│   ├── models/          # MongoDB Mongoose schemas
-│   ├── controllers/     # Request handlers and business logic
-│   └── src/             # Core application logic and services
-├── .env.example         # Example environment variables
-├── .gitignore           # Git ignore rules
-└── README.md            # Project documentation
+The application features a sophisticated AI integration designed for performance, resilience, and cost-efficiency. To avoid redundant LLM API calls, the system deterministically hashes the user's financial state to cache AI responses.
+
+### Request Lifecycle
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant UI as React Frontend
+    participant Service as roastGenerationService
+    participant Cache as MongoDB (RoastCache)
+    participant Gemini as GeminiService (LLM)
+    participant Fallback as FallbackGenerator
+    
+    User->>UI: Requests financial roast/insight (Selects Mode)
+    UI->>Service: POST /api/roasts/generate { expenses, goals, mode }
+    
+    rect rgb(40, 40, 40)
+        Note right of Service: 1. Data Normalization & Hashing
+        Service->>Service: Calculate current month stats
+        Service->>Service: Hash expenses + mode for Cache Key
+    end
+    
+    Service->>Cache: Check for existing cached response
+    
+    alt Cache Hit
+        Cache-->>Service: Return cached roast, insight, suggestion
+    else Cache Miss
+        Service->>Service: Construct Prompt (Data + Rules)
+        Service->>Gemini: Request JSON Generation (with retry logic)
+        
+        alt Gemini Success
+            Gemini-->>Service: Return parsed JSON response
+        else Rate Limit / API Failure
+            Gemini--xService: Throw Error (e.g., 429)
+            Note right of Service: 2. Fallback Mechanism Triggered
+            Service->>Fallback: Generate deterministic local roast
+            Fallback-->>Service: Return structured fallback data
+        end
+        
+        Service->>Cache: Save new response asynchronously
+    end
+    
+    Service-->>UI: Return final AI Response (roast, insight, suggestion)
+    UI-->>User: Render insights & charts
 ```
 
 ---
 
-## 🚀 Installation
+## 🚀 Getting Started
 
-Follow these steps to run the project locally.
+Follow these steps to run Rupee Roast locally on your machine.
 
-**Step 1:** Clone the repository
+### Prerequisites
+- Node.js (v18+ recommended)
+- MongoDB (Local instance or MongoDB Atlas URI)
+- Google Gemini API Key
+
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/Akshatgupta000/rupee-roast.git
-```
-
-**Step 2:** Navigate into the project
-```bash
+git clone <repository-url>
 cd rupee-roast
 ```
 
-**Step 3:** Install dependencies
+### 2. Setup the Backend
 ```bash
-# Install root dependencies (if any)
+cd server
 npm install
 
-# Install frontend dependencies (if separate)
-cd client
-npm install
-
-# Install backend dependencies (if separate)
-cd ../server
-npm install
+# Create environment variables
+cp .env.example .env
+```
+Ensure your `server/.env` includes:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-**Step 4:** Create environment variables
-Copy the `.env.example` file and fill in your details:
+### 3. Setup the Frontend
 ```bash
+cd ../client
+npm install
+
+# Create environment variables
 cp .env.example .env
 ```
 
-**Step 5:** Run the application
+### 4. Run the Application
+Open two terminal windows:
+
+**Terminal 1 (Backend):**
 ```bash
-# From root or respective folders depending on your setup
-npm start
+cd server
+npm run dev
 ```
 
----
-
-## ⚙️ Environment Variables
-
-The application requires certain environment variables to be set in your `.env` file:
-
-| Variable | Description |
-|----------|-------------|
-| `PORT` | The port for the backend server to run on |
-| `MONGODB_URI` | Your MongoDB connection string |
-| `GEMINI_API_KEY` | API Key for external AI service |
-| `JWT_SECRET` | Secret key for authentication |
+**Terminal 2 (Frontend):**
+```bash
+cd client
+npm run dev
+```
+The client will typically start on `http://localhost:5173` and the server on `http://localhost:5000`.
 
 ---
 
-## 🔌 API Endpoints
+## 🛠 Engineering Practices Highlighted
 
-Example API routes exposed by the backend:
-
-- `GET /api/expenses` - Retrieve user expenses
-- `POST /api/auth/login` - Authenticate user
-- `POST /api/auth/register` - Create a new user account
-- `POST /api/roast/generate` - Generate an AI financial roast
+- **Deterministic Caching:** Instead of making expensive LLM calls on every request, the backend computes a hash of the user's current financial variables (expenses, amounts, categories) mixed with the selected AI "mode". This hash is used as a cache key in MongoDB, significantly reducing latency and API costs.
+- **Robust Error Handling & Retries:** The `geminiService` includes custom exponential backoff logic to elegantly handle HTTP 429 Rate Limit errors from the LLM provider.
+- **High Availability:** If the external AI service goes down or times out, the `roastGenerationService` automatically falls back to a deterministic, rule-based generation engine (`FallbackGenerator`) ensuring the end-user always receives a response.
+- **Stateless Authentication:** Implements JWT-based authorization, allowing the backend to horizontally scale without session management overhead.
 
 ---
 
-## ☁️ Deployment
-
-This project is designed to be easily deployed to modern cloud platforms:
-
-- **Frontend**: Deploy perfectly on platforms like [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/).
-- **Backend**: Can be hosted easily on platforms like [Render](https://render.com/) or [Heroku](https://heroku.com/) using the provided environment variables mappings.
-
----
-
-## 🤝 Contributing
-
-Contributions make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-
-## 👤 Author
-
-Developed with ❤️ by **Akshatgupta000**
-- GitHub: [@Akshatgupta000](https://github.com/Akshatgupta000)
+<div align="center">
+  <i>Engineered with clean architecture, performance optimizations, and a touch of humor.</i>
+</div>
