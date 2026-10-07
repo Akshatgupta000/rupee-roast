@@ -1,0 +1,465 @@
+{
+  "excluded": [
+    "node_modules",
+    ".git",
+    "dist",
+    "build",
+    "coverage",
+    ".vite"
+  ],
+  "fileCount": 110,
+  "totalLines": 63223,
+  "totalLinesExcludingPackageLock": 57425,
+  "packageLockLines": 5798,
+  "byExt": {
+    ".mjs": 809,
+    ".js": 2991,
+    ".md": 531,
+    ".json": 55950,
+    ".html": 14,
+    ".css": 240,
+    ".jsx": 2688
+  },
+  "files": [
+    {
+      "file": "benchmarks\\count-api-and-collections.mjs",
+      "lines": 116
+    },
+    {
+      "file": "benchmarks\\count-loc.mjs",
+      "lines": 70
+    },
+    {
+      "file": "benchmarks\\gemini-cache.mjs",
+      "lines": 327
+    },
+    {
+      "file": "benchmarks\\metrics.js",
+      "lines": 72
+    },
+    {
+      "file": "benchmarks\\probe-gemini.mjs",
+      "lines": 42
+    },
+    {
+      "file": "benchmarks\\README.md",
+      "lines": 49
+    },
+    {
+      "file": "benchmarks\\results\\api-and-collections.json",
+      "lines": 157
+    },
+    {
+      "file": "benchmarks\\results\\gemini-cache.json",
+      "lines": 2827
+    },
+    {
+      "file": "benchmarks\\results\\lighthouse-run-1.json",
+      "lines": 9226
+    },
+    {
+      "file": "benchmarks\\results\\lighthouse-run-2.json",
+      "lines": 9184
+    },
+    {
+      "file": "benchmarks\\results\\lighthouse-run-3.json",
+      "lines": 9188
+    },
+    {
+      "file": "benchmarks\\results\\lighthouse-run-4.json",
+      "lines": 9201
+    },
+    {
+      "file": "benchmarks\\results\\lighthouse-run-5.json",
+      "lines": 9069
+    },
+    {
+      "file": "benchmarks\\results\\lighthouse.json",
+      "lines": 64
+    },
+    {
+      "file": "benchmarks\\results\\loc.json",
+      "lines": 433
+    },
+    {
+      "file": "benchmarks\\run-lighthouse.mjs",
+      "lines": 116
+    },
+    {
+      "file": "client\\eslint.config.js",
+      "lines": 30
+    },
+    {
+      "file": "client\\index.html",
+      "lines": 14
+    },
+    {
+      "file": "client\\package-lock.json",
+      "lines": 4170
+    },
+    {
+      "file": "client\\package.json",
+      "lines": 36
+    },
+    {
+      "file": "client\\postcss.config.js",
+      "lines": 7
+    },
+    {
+      "file": "client\\README.md",
+      "lines": 17
+    },
+    {
+      "file": "client\\src\\api\\index.js",
+      "lines": 45
+    },
+    {
+      "file": "client\\src\\App.css",
+      "lines": 185
+    },
+    {
+      "file": "client\\src\\App.jsx",
+      "lines": 57
+    },
+    {
+      "file": "client\\src\\components\\common\\BudgetCard.jsx",
+      "lines": 26
+    },
+    {
+      "file": "client\\src\\components\\common\\Navbar.jsx",
+      "lines": 102
+    },
+    {
+      "file": "client\\src\\components\\common\\Sidebar.jsx",
+      "lines": 46
+    },
+    {
+      "file": "client\\src\\config\\api.js",
+      "lines": 2
+    },
+    {
+      "file": "client\\src\\context\\AuthContext.jsx",
+      "lines": 68
+    },
+    {
+      "file": "client\\src\\features\\auth\\Login.jsx",
+      "lines": 88
+    },
+    {
+      "file": "client\\src\\features\\auth\\Signup.jsx",
+      "lines": 101
+    },
+    {
+      "file": "client\\src\\features\\dashboard\\BudgetPredictionCard.jsx",
+      "lines": 89
+    },
+    {
+      "file": "client\\src\\features\\dashboard\\Dashboard.jsx",
+      "lines": 356
+    },
+    {
+      "file": "client\\src\\features\\dashboard\\FinancialHealthCard.jsx",
+      "lines": 86
+    },
+    {
+      "file": "client\\src\\features\\expenses\\Expenses.jsx",
+      "lines": 210
+    },
+    {
+      "file": "client\\src\\features\\goals\\GoalCard.jsx",
+      "lines": 148
+    },
+    {
+      "file": "client\\src\\features\\goals\\GoalPlannerCard.jsx",
+      "lines": 109
+    },
+    {
+      "file": "client\\src\\features\\goals\\GoalProgress.jsx",
+      "lines": 30
+    },
+    {
+      "file": "client\\src\\features\\goals\\Goals.jsx",
+      "lines": 150
+    },
+    {
+      "file": "client\\src\\features\\roast\\AIAdvicePanel.jsx",
+      "lines": 211
+    },
+    {
+      "file": "client\\src\\features\\roast\\Roast.jsx",
+      "lines": 322
+    },
+    {
+      "file": "client\\src\\features\\roast\\RoastCard.jsx",
+      "lines": 193
+    },
+    {
+      "file": "client\\src\\features\\savings\\Savings.jsx",
+      "lines": 181
+    },
+    {
+      "file": "client\\src\\index.css",
+      "lines": 55
+    },
+    {
+      "file": "client\\src\\layouts\\Layout.jsx",
+      "lines": 22
+    },
+    {
+      "file": "client\\src\\main.jsx",
+      "lines": 11
+    },
+    {
+      "file": "client\\src\\pages\\Landing.jsx",
+      "lines": 82
+    },
+    {
+      "file": "client\\src\\services\\api.js",
+      "lines": 42
+    },
+    {
+      "file": "client\\tailwind.config.js",
+      "lines": 49
+    },
+    {
+      "file": "client\\vite.config.js",
+      "lines": 16
+    },
+    {
+      "file": "FALLBACK_ROAST_IMPLEMENTATION.md",
+      "lines": 313
+    },
+    {
+      "file": "package-lock.json",
+      "lines": 35
+    },
+    {
+      "file": "package.json",
+      "lines": 15
+    },
+    {
+      "file": "README.md",
+      "lines": 152
+    },
+    {
+      "file": "server\\add_expense_test.js",
+      "lines": 37
+    },
+    {
+      "file": "server\\available_models.json",
+      "lines": 724
+    },
+    {
+      "file": "server\\direct_test.js",
+      "lines": 36
+    },
+    {
+      "file": "server\\fix_db.js",
+      "lines": 27
+    },
+    {
+      "file": "server\\list_models.js",
+      "lines": 27
+    },
+    {
+      "file": "server\\package-lock.json",
+      "lines": 1593
+    },
+    {
+      "file": "server\\package.json",
+      "lines": 28
+    },
+    {
+      "file": "server\\scripts\\smokeTest.mjs",
+      "lines": 100
+    },
+    {
+      "file": "server\\server.js",
+      "lines": 85
+    },
+    {
+      "file": "server\\src\\app.js",
+      "lines": 89
+    },
+    {
+      "file": "server\\src\\config\\db.js",
+      "lines": 14
+    },
+    {
+      "file": "server\\src\\controllers\\adviceController.js",
+      "lines": 32
+    },
+    {
+      "file": "server\\src\\controllers\\authController.js",
+      "lines": 71
+    },
+    {
+      "file": "server\\src\\controllers\\budgetController.js",
+      "lines": 61
+    },
+    {
+      "file": "server\\src\\controllers\\expenseController.js",
+      "lines": 79
+    },
+    {
+      "file": "server\\src\\controllers\\financeController.js",
+      "lines": 34
+    },
+    {
+      "file": "server\\src\\controllers\\goalController.js",
+      "lines": 136
+    },
+    {
+      "file": "server\\src\\controllers\\roastController.js",
+      "lines": 70
+    },
+    {
+      "file": "server\\src\\middleware\\aiRateLimit.js",
+      "lines": 25
+    },
+    {
+      "file": "server\\src\\middleware\\authMiddleware.js",
+      "lines": 41
+    },
+    {
+      "file": "server\\src\\middleware\\errorMiddleware.js",
+      "lines": 20
+    },
+    {
+      "file": "server\\src\\models\\Budget.js",
+      "lines": 33
+    },
+    {
+      "file": "server\\src\\models\\Expense.js",
+      "lines": 42
+    },
+    {
+      "file": "server\\src\\models\\Goal.js",
+      "lines": 40
+    },
+    {
+      "file": "server\\src\\models\\Roast.js",
+      "lines": 33
+    },
+    {
+      "file": "server\\src\\models\\RoastCache.js",
+      "lines": 26
+    },
+    {
+      "file": "server\\src\\models\\User.js",
+      "lines": 40
+    },
+    {
+      "file": "server\\src\\routes\\authRoutes.js",
+      "lines": 10
+    },
+    {
+      "file": "server\\src\\routes\\budgetRoutes.js",
+      "lines": 13
+    },
+    {
+      "file": "server\\src\\routes\\expenseRoutes.js",
+      "lines": 23
+    },
+    {
+      "file": "server\\src\\routes\\financeRoutes.js",
+      "lines": 17
+    },
+    {
+      "file": "server\\src\\routes\\goalRoutes.js",
+      "lines": 27
+    },
+    {
+      "file": "server\\src\\routes\\roastRoutes.js",
+      "lines": 18
+    },
+    {
+      "file": "server\\src\\services\\budgetAnalyzer.js",
+      "lines": 74
+    },
+    {
+      "file": "server\\src\\services\\financeAnalyticsService.js",
+      "lines": 104
+    },
+    {
+      "file": "server\\src\\services\\geminiService.js",
+      "lines": 192
+    },
+    {
+      "file": "server\\src\\services\\healthScoreService.js",
+      "lines": 100
+    },
+    {
+      "file": "server\\src\\services\\predictionService.js",
+      "lines": 59
+    },
+    {
+      "file": "server\\src\\services\\roastFallbackService.js",
+      "lines": 208
+    },
+    {
+      "file": "server\\src\\services\\roastGenerationService.js",
+      "lines": 167
+    },
+    {
+      "file": "server\\src\\test_env.js",
+      "lines": 25
+    },
+    {
+      "file": "server\\src\\utils\\fallbackRoasts.js",
+      "lines": 150
+    },
+    {
+      "file": "server\\src\\utils\\hashExpenses.js",
+      "lines": 39
+    },
+    {
+      "file": "server\\src\\utils\\roastPrompt.js",
+      "lines": 58
+    },
+    {
+      "file": "server\\test_bug.js",
+      "lines": 24
+    },
+    {
+      "file": "server\\test_bug.mjs",
+      "lines": 38
+    },
+    {
+      "file": "server\\test_cache_logic.js",
+      "lines": 52
+    },
+    {
+      "file": "server\\test_dates.js",
+      "lines": 31
+    },
+    {
+      "file": "server\\test_fallback_roasts.js",
+      "lines": 43
+    },
+    {
+      "file": "server\\test_gemini.js",
+      "lines": 35
+    },
+    {
+      "file": "server\\test_optimization.js",
+      "lines": 50
+    },
+    {
+      "file": "test_remote.js",
+      "lines": 25
+    },
+    {
+      "file": "test_remote2.js",
+      "lines": 28
+    },
+    {
+      "file": "tmp\\list_models.js",
+      "lines": 28
+    },
+    {
+      "file": "tmp\\test_gemini.js",
+      "lines": 30
+    }
+  ]
+}

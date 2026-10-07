@@ -88,6 +88,25 @@ sequenceDiagram
 
 ---
 
+## ⚡ Performance Benchmarks & Quality Scores
+
+All metrics were empirically measured across 5 runs using runnable scripts in [`/benchmarks`](./benchmarks).
+
+### AI Cache Efficiency (30 requests across 10 unique inputs × 3 repeats)
+- **External Calls Saved:** **53.33%** (14 calls made vs 30 requests; 16 cached responses).
+- **Latency Reduction:** **91.81%** (from 705.19 ms miss down to 57.68 ms index hit).
+- **Cache Hit Latency:** **57.68 ms** average (direct compound index `{ userId, expenseHash }`).
+
+### Lighthouse Audit Scores (5 Runs on Vite Production Preview)
+| Metric | Score | Status |
+| :--- | :--- | :--- |
+| **Best Practices** | **100 / 100** | 🟢 Perfect score |
+| **Accessibility** | **83 / 100** | 🟢 High accessibility standards |
+| **SEO** | **82 / 100** | 🟢 Fully discoverable metadata |
+| **Performance** | **71.8 / 100** | 🟡 Solid SPA client performance |
+
+---
+
 ## 🚀 Getting Started
 
 Follow these steps to run Rupee Roast locally on your machine.

@@ -1,0 +1,2827 @@
+{
+  "probeOut": "[dotenv@17.3.1] injecting env (0) from server\\.env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2\nPROBE_RESULT error\nPROBE_MS 671\nPROBE_ERROR [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.\nAssertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\\win\\async.c, line 94",
+  "geminiMode": "mocked (Gemini probe error)",
+  "afterRuns": [
+    {
+      "label": "after-1",
+      "forceRefresh": false,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 16,
+      "cacheMisses": 14,
+      "geminiCalls": 14,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 14,
+      "inFlightJoins": 0,
+      "callsSaved": 16,
+      "callsSavedPct": 53.33,
+      "missLatencyMs": {
+        "avg": 702.34,
+        "min": 658.04,
+        "max": 977.17,
+        "n": 14
+      },
+      "hitLatencyMs": {
+        "avg": 55.6,
+        "min": 44.92,
+        "max": 75.63,
+        "n": 16
+      },
+      "geminiLatencyMs": {
+        "avg": 505.9693499999998,
+        "min": 499.5811999999987,
+        "max": 513.8846000000003,
+        "n": 14
+      },
+      "latencyImprovementPct": 92.08,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 703.49
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 704.79
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 977.38
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 670.72
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 668.05
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 670.47
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 680.76
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.64
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 703.45
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 55.85
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 45.06
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 658.2
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 46.85
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 51.8
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 677.01
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 75.77
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 56.62
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 683.31
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 45.65
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 46.35
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 696.38
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 57.49
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 55.4
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 667.3
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 64.28
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 51.49
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 674.09
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.45
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 64.25
+        }
+      ]
+    },
+    {
+      "label": "after-2",
+      "forceRefresh": false,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 16,
+      "cacheMisses": 14,
+      "geminiCalls": 14,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 14,
+      "inFlightJoins": 0,
+      "callsSaved": 16,
+      "callsSavedPct": 53.33,
+      "missLatencyMs": {
+        "avg": 760.5,
+        "min": 668.59,
+        "max": 845.42,
+        "n": 14
+      },
+      "hitLatencyMs": {
+        "avg": 59.93,
+        "min": 45.53,
+        "max": 99.57,
+        "n": 16
+      },
+      "geminiLatencyMs": {
+        "avg": 511.7224571428572,
+        "min": 505.1911,
+        "max": 516.6417000000001,
+        "n": 14
+      },
+      "latencyImprovementPct": 92.12,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 844.7
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 845.2
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 845.46
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 797.94
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 801.9
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 802.58
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 780.71
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 62.82
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.88
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 669.12
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 77.06
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 99.69
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 682.15
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 47.29
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 60.51
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 683.35
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 55.79
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 60.14
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 697.74
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 51.79
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 60.98
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 704.34
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 54.95
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 74.59
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 668.71
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 47.1
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 50.38
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 824.79
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 53.36
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 45.69
+        }
+      ]
+    },
+    {
+      "label": "after-3",
+      "forceRefresh": false,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 16,
+      "cacheMisses": 14,
+      "geminiCalls": 14,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 14,
+      "inFlightJoins": 0,
+      "callsSaved": 16,
+      "callsSavedPct": 53.33,
+      "missLatencyMs": {
+        "avg": 689.58,
+        "min": 663.04,
+        "max": 722.5,
+        "n": 14
+      },
+      "hitLatencyMs": {
+        "avg": 63.19,
+        "min": 48.22,
+        "max": 101.39,
+        "n": 16
+      },
+      "geminiLatencyMs": {
+        "avg": 509.519514285714,
+        "min": 500.8185999999987,
+        "max": 518.3854999999967,
+        "n": 14
+      },
+      "latencyImprovementPct": 90.84,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 686.16
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 696.1
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 695.73
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 693.03
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 693.44
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 693.68
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 666.07
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 54.38
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 61
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 722.66
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.43
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 64.11
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 689.25
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 64.48
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 79.29
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 674.03
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 48.39
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 74.18
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 673.74
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 60.8
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 61.22
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 716.73
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 51.5
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 101.56
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 663.17
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 56.54
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 60.8
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 691.9
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.84
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 56.74
+        }
+      ]
+    },
+    {
+      "label": "after-4",
+      "forceRefresh": false,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 16,
+      "cacheMisses": 14,
+      "geminiCalls": 14,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 14,
+      "inFlightJoins": 0,
+      "callsSaved": 16,
+      "callsSavedPct": 53.33,
+      "missLatencyMs": {
+        "avg": 692.38,
+        "min": 680.7,
+        "max": 708.08,
+        "n": 14
+      },
+      "hitLatencyMs": {
+        "avg": 55.35,
+        "min": 48.39,
+        "max": 62.14,
+        "n": 16
+      },
+      "geminiLatencyMs": {
+        "avg": 511.4094357142855,
+        "min": 503.10009999999966,
+        "max": 516.5928999999996,
+        "n": 14
+      },
+      "latencyImprovementPct": 92.01,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 690.73
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 697.32
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 696.68
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 695.83
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 698.04
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 698.66
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 695.35
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 49.44
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 50.47
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 708.25
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 62.36
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.11
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 684.27
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 55.26
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 50.31
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 683.59
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 57.77
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.61
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 697.31
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 52.89
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 57.88
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 686.89
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.13
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.31
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 680.86
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 57.23
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.24
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 681.35
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 48.52
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 51.27
+        }
+      ]
+    },
+    {
+      "label": "after-5",
+      "forceRefresh": false,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 16,
+      "cacheMisses": 14,
+      "geminiCalls": 14,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 14,
+      "inFlightJoins": 0,
+      "callsSaved": 16,
+      "callsSavedPct": 53.33,
+      "missLatencyMs": {
+        "avg": 681.13,
+        "min": 664.05,
+        "max": 716.68,
+        "n": 14
+      },
+      "hitLatencyMs": {
+        "avg": 54.34,
+        "min": 47.9,
+        "max": 68.01,
+        "n": 16
+      },
+      "geminiLatencyMs": {
+        "avg": 508.65958571428666,
+        "min": 501.58520000000135,
+        "max": 515.3840000000055,
+        "n": 14
+      },
+      "latencyImprovementPct": 92.02,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 667.29
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 664.14
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 667.55
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 679.2
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 678.3
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": true,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 677.73
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 667.11
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.5
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 49.72
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 690.75
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 49.81
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.27
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 700.79
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 49.15
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 51.19
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 679.86
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.78
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 59.7
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 680.99
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 68.14
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 50.33
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 692.01
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 58.16
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 49.53
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 716.77
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 54.66
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 47.99
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 674.99
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 55.83
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": true,
+          "fallbackUsed": false,
+          "wallMs": 48.86
+        }
+      ]
+    }
+  ],
+  "beforeRuns": [
+    {
+      "label": "before-1",
+      "forceRefresh": true,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 0,
+      "cacheMisses": 30,
+      "geminiCalls": 30,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 30,
+      "inFlightJoins": 0,
+      "callsSaved": 0,
+      "callsSavedPct": 0,
+      "missLatencyMs": {
+        "avg": 579.55,
+        "min": 560.24,
+        "max": 649.77,
+        "n": 30
+      },
+      "hitLatencyMs": {
+        "avg": null,
+        "min": null,
+        "max": null,
+        "n": 0
+      },
+      "geminiLatencyMs": {
+        "avg": 508.66421999999994,
+        "min": 501.0746999999974,
+        "max": 516.1716000000015,
+        "n": 30
+      },
+      "latencyImprovementPct": null,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 562.28
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 607.07
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.48
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 601.15
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 577.34
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 582.68
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 631.78
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.63
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 649.86
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.5
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 573.26
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 575.34
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 576.23
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.7
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.33
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 565.07
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 614.17
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 564.38
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 562.24
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 584.69
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.39
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.25
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 568.77
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.51
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.29
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 573.64
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.14
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 567.21
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 576.78
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 560.32
+        }
+      ]
+    },
+    {
+      "label": "before-2",
+      "forceRefresh": true,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 0,
+      "cacheMisses": 30,
+      "geminiCalls": 30,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 30,
+      "inFlightJoins": 0,
+      "callsSaved": 0,
+      "callsSavedPct": 0,
+      "missLatencyMs": {
+        "avg": 589.91,
+        "min": 550.29,
+        "max": 1167.38,
+        "n": 30
+      },
+      "hitLatencyMs": {
+        "avg": null,
+        "min": null,
+        "max": null,
+        "n": 0
+      },
+      "geminiLatencyMs": {
+        "avg": 508.964406666667,
+        "min": 500.758799999996,
+        "max": 516.5246000000043,
+        "n": 30
+      },
+      "latencyImprovementPct": null,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.51
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.04
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 575.81
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 554.94
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 559.69
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.85
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.93
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 594.52
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 553.86
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 581.83
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.15
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.22
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.29
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.4
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.67
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 565.88
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.63
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 550.37
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.69
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 1167.47
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.09
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 585.1
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.34
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 553.27
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 580.24
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 561.1
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.97
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 560.36
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.8
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.13
+        }
+      ]
+    },
+    {
+      "label": "before-3",
+      "forceRefresh": true,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 0,
+      "cacheMisses": 30,
+      "geminiCalls": 30,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 30,
+      "inFlightJoins": 0,
+      "callsSaved": 0,
+      "callsSavedPct": 0,
+      "missLatencyMs": {
+        "avg": 571.24,
+        "min": 555.18,
+        "max": 587.01,
+        "n": 30
+      },
+      "hitLatencyMs": {
+        "avg": null,
+        "min": null,
+        "max": null,
+        "n": 0
+      },
+      "geminiLatencyMs": {
+        "avg": 509.6207500000004,
+        "min": 502.0937000000122,
+        "max": 516.997000000003,
+        "n": 30
+      },
+      "latencyImprovementPct": null,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.08
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 573.93
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 565.38
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.65
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.83
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.67
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 580.45
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 586.19
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 573.01
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 562.44
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 584.52
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 562.82
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 581.67
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 579.08
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 559.41
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.51
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 583.85
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.04
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 567.44
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 568.82
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 559.03
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 563.07
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 581.84
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 565.61
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 587.15
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 556.88
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 555.26
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 583.33
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 576.25
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 567.07
+        }
+      ]
+    },
+    {
+      "label": "before-4",
+      "forceRefresh": true,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 0,
+      "cacheMisses": 30,
+      "geminiCalls": 30,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 30,
+      "inFlightJoins": 0,
+      "callsSaved": 0,
+      "callsSavedPct": 0,
+      "missLatencyMs": {
+        "avg": 574.96,
+        "min": 558.35,
+        "max": 615.17,
+        "n": 30
+      },
+      "hitLatencyMs": {
+        "avg": null,
+        "min": null,
+        "max": null,
+        "n": 0
+      },
+      "geminiLatencyMs": {
+        "avg": 508.21521666666666,
+        "min": 500.34590000000026,
+        "max": 515.3358999999909,
+        "n": 30
+      },
+      "latencyImprovementPct": null,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.68
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.34
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 590.79
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 558.45
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 584.9
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 575.24
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 615.35
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.8
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.23
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 573.91
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 579.53
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 583.63
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.22
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.14
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.46
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 568.33
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 570.51
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 597.83
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.14
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.51
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.55
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 562.98
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.66
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 562.44
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.3
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 568.79
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 601.24
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 575.49
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.57
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 560.65
+        }
+      ]
+    },
+    {
+      "label": "before-5",
+      "forceRefresh": true,
+      "geminiMode": "mocked (Gemini probe error)",
+      "totalRequests": 30,
+      "cacheHits": 0,
+      "cacheMisses": 30,
+      "geminiCalls": 30,
+      "geminiRealCalls": 0,
+      "geminiMockedCalls": 30,
+      "inFlightJoins": 0,
+      "callsSaved": 0,
+      "callsSavedPct": 0,
+      "missLatencyMs": {
+        "avg": 572.85,
+        "min": 552.19,
+        "max": 611.82,
+        "n": 30
+      },
+      "hitLatencyMs": {
+        "avg": null,
+        "min": null,
+        "max": null,
+        "n": 0
+      },
+      "geminiLatencyMs": {
+        "avg": 507.4913799999995,
+        "min": 500.84500000000116,
+        "max": 515.7608999999939,
+        "n": 30
+      },
+      "latencyImprovementPct": null,
+      "perRequest": [
+        {
+          "unique": 0,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 552.35
+        },
+        {
+          "unique": 0,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 567.73
+        },
+        {
+          "unique": 0,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 560
+        },
+        {
+          "unique": 1,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.69
+        },
+        {
+          "unique": 1,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.74
+        },
+        {
+          "unique": 1,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.84
+        },
+        {
+          "unique": 2,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.04
+        },
+        {
+          "unique": 2,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 587.25
+        },
+        {
+          "unique": 2,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 575.21
+        },
+        {
+          "unique": 3,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 552.56
+        },
+        {
+          "unique": 3,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 583.06
+        },
+        {
+          "unique": 3,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 555.34
+        },
+        {
+          "unique": 4,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 588.83
+        },
+        {
+          "unique": 4,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 587.15
+        },
+        {
+          "unique": 4,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.71
+        },
+        {
+          "unique": 5,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 572.56
+        },
+        {
+          "unique": 5,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 574.06
+        },
+        {
+          "unique": 5,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 564.86
+        },
+        {
+          "unique": 6,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.77
+        },
+        {
+          "unique": 6,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 566.99
+        },
+        {
+          "unique": 6,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 560.61
+        },
+        {
+          "unique": 7,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 575.31
+        },
+        {
+          "unique": 7,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 564.99
+        },
+        {
+          "unique": 7,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 559.05
+        },
+        {
+          "unique": 8,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 578.49
+        },
+        {
+          "unique": 8,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 571.12
+        },
+        {
+          "unique": 8,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 582.28
+        },
+        {
+          "unique": 9,
+          "repeat": 0,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 569.69
+        },
+        {
+          "unique": 9,
+          "repeat": 1,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 577.59
+        },
+        {
+          "unique": 9,
+          "repeat": 2,
+          "concurrent": false,
+          "cached": false,
+          "fallbackUsed": false,
+          "wallMs": 611.91
+        }
+      ]
+    }
+  ],
+  "rollup": {
+    "geminiMode": "mocked (Gemini probe error)",
+    "mockDelayMs": 500,
+    "note": "No in-flight request deduplication exists in roastGenerationService.js. Concurrent identical first-hits each miss MongoDB and each call Gemini (or the mock). Sequential repeats hit RoastCache.",
+    "after": {
+      "geminiCalls": {
+        "avg": 14,
+        "min": 14,
+        "max": 14,
+        "n": 5
+      },
+      "callsSavedPct": {
+        "avg": 53.33,
+        "min": 53.33,
+        "max": 53.33,
+        "n": 5
+      },
+      "cacheHits": {
+        "avg": 16,
+        "min": 16,
+        "max": 16,
+        "n": 5
+      },
+      "cacheMisses": {
+        "avg": 14,
+        "min": 14,
+        "max": 14,
+        "n": 5
+      },
+      "missLatencyMs": {
+        "avg": 705.186,
+        "min": 681.13,
+        "max": 760.5,
+        "n": 5
+      },
+      "hitLatencyMs": {
+        "avg": 57.681999999999995,
+        "min": 54.34,
+        "max": 63.19,
+        "n": 5
+      },
+      "latencyImprovementPct": {
+        "avg": 91.814,
+        "min": 90.84,
+        "max": 92.12,
+        "n": 5
+      }
+    },
+    "before": {
+      "geminiCalls": {
+        "avg": 30,
+        "min": 30,
+        "max": 30,
+        "n": 5
+      },
+      "callsSavedPct": {
+        "avg": 0,
+        "min": 0,
+        "max": 0,
+        "n": 5
+      },
+      "missLatencyMs": {
+        "avg": 577.702,
+        "min": 571.24,
+        "max": 589.91,
+        "n": 5
+      }
+    }
+  }
+}

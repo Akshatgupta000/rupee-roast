@@ -111,11 +111,41 @@ const generateText = async (prompt, { model = DEFAULT_MODEL } = {}) => {
   return String(response.text?.() ?? '');
 };
 
+const MOCK_ROAST = {
+  roast: 'BENCHMARK_MOCK roast',
+  insight: 'BENCHMARK_MOCK insight',
+  suggestion: 'BENCHMARK_MOCK suggestion',
+};
+
+const mockDelayMs = () => Number(process.env.BENCHMARK_MOCK_DELAY_MS || 800);
+
+const shouldMockGemini = () =>
+  process.env.BENCHMARK === 'true' &&
+  (process.env.BENCHMARK_MOCK === 'true' || !GEMINI_API_KEY);
+
+const recordGeminiBenchmark = async ({ latencyMs, mocked }) => {
+  if (process.env.BENCHMARK !== 'true') return;
+  const metrics = await import('../../../benchmarks/metrics.js');
+  metrics.recordGeminiCall({ latencyMs, mocked });
+};
+
 /**
  * Generate roast + insight + suggestion from Gemini.
  * Returns: { roast: string, insight: string, suggestion: string }
  */
 export const generateRoastFromGemini = async (prompt, { model = DEFAULT_MODEL } = {}) => {
+  const bench = process.env.BENCHMARK === 'true';
+  const startedAt = bench ? performance.now() : 0;
+
+  if (shouldMockGemini()) {
+    await sleep(mockDelayMs());
+    await recordGeminiBenchmark({ latencyMs: performance.now() - startedAt, mocked: true });
+    if (bench) {
+      console.log('[BENCHMARK] Gemini call mocked with fixed delay', mockDelayMs(), 'ms');
+    }
+    return { ...MOCK_ROAST };
+  }
+
   try {
     const data = await executeWithRetry(() => generateJSON(prompt, { model }), { attempts: 3 });
 
@@ -123,12 +153,19 @@ export const generateRoastFromGemini = async (prompt, { model = DEFAULT_MODEL } 
     if (!data?.insight) throw new Error('AI response missing "insight" field.');
     if (!data?.suggestion) throw new Error('AI response missing "suggestion" field.');
 
+    await recordGeminiBenchmark({ latencyMs: performance.now() - startedAt, mocked: false });
     return {
       roast: String(data.roast),
       insight: String(data.insight),
       suggestion: String(data.suggestion),
     };
   } catch (err) {
+    if (bench && shouldRetry(err)) {
+      await sleep(mockDelayMs());
+      await recordGeminiBenchmark({ latencyMs: performance.now() - startedAt, mocked: true });
+      console.log('[BENCHMARK] Gemini rate-limited; mocked remaining call with fixed delay', mockDelayMs(), 'ms');
+      return { ...MOCK_ROAST };
+    }
     console.error('[GeminiService] Failed to generate structured roast:', err?.message || err);
     if (err?.statusCode) throw err;
     const e = new Error(err?.message || 'Gemini service unavailable');

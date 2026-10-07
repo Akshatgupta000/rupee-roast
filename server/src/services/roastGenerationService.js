@@ -62,6 +62,14 @@ const normalizeGoalsForPrompt = (goals = []) => {
   }));
 };
 
+const benchmarkEnabled = () => process.env.BENCHMARK === 'true';
+
+const recordBenchmark = async (fnName, ...args) => {
+  if (!benchmarkEnabled()) return;
+  const metrics = await import('../../../benchmarks/metrics.js');
+  metrics[fnName](...args);
+};
+
 export const generateRoastWithCache = async ({
   userId,
   expenses = [],
@@ -69,6 +77,7 @@ export const generateRoastWithCache = async ({
   roastMode = 'chill',
   forceRefresh = false,
 } = {}) => {
+  const benchStartedAt = benchmarkEnabled() ? performance.now() : 0;
   const recentExpenses = Array.isArray(expenses) ? expenses : [];
 
   // Hash must represent the same "financial state" consistently.
@@ -93,6 +102,7 @@ export const generateRoastWithCache = async ({
         ? await RoastCache.findOne({ userId, expenseHash })
         : null);
     if (cached) {
+      await recordBenchmark('recordCacheHit', performance.now() - benchStartedAt);
       return {
         roast: cached.roast,
         insight: cached.insight,
@@ -145,6 +155,7 @@ export const generateRoastWithCache = async ({
     );
   }
 
+  await recordBenchmark('recordCacheMiss', performance.now() - benchStartedAt);
   return {
     roast: result.roast,
     insight: result.insight,

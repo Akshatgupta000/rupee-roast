@@ -1,0 +1,157 @@
+{
+  "uniqueApiEndpoints": 26,
+  "endpoints": [
+    {
+      "source": "server.js",
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "source": "authRoutes.js",
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "source": "authRoutes.js",
+      "method": "POST",
+      "path": "/api/auth/register"
+    },
+    {
+      "source": "budgetRoutes.js",
+      "method": "GET",
+      "path": "/api/budget/current"
+    },
+    {
+      "source": "budgetRoutes.js",
+      "method": "POST",
+      "path": "/api/budget/set"
+    },
+    {
+      "source": "expenseRoutes.js",
+      "method": "GET",
+      "path": "/api/expenses"
+    },
+    {
+      "source": "expenseRoutes.js",
+      "method": "POST",
+      "path": "/api/expenses"
+    },
+    {
+      "source": "expenseRoutes.js",
+      "method": "DELETE",
+      "path": "/api/expenses/:id"
+    },
+    {
+      "source": "expenseRoutes.js",
+      "method": "PUT",
+      "path": "/api/expenses/:id"
+    },
+    {
+      "source": "expenseRoutes.js",
+      "method": "POST",
+      "path": "/api/expenses/add"
+    },
+    {
+      "source": "expenseRoutes.js",
+      "method": "GET",
+      "path": "/api/expenses/list"
+    },
+    {
+      "source": "financeRoutes.js",
+      "method": "POST",
+      "path": "/api/finance/advice"
+    },
+    {
+      "source": "financeRoutes.js",
+      "method": "GET",
+      "path": "/api/finance/health-score"
+    },
+    {
+      "source": "financeRoutes.js",
+      "method": "GET",
+      "path": "/api/finance/predict-budget"
+    },
+    {
+      "source": "financeRoutes.js",
+      "method": "GET",
+      "path": "/api/finance/summary"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "GET",
+      "path": "/api/goals"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "DELETE",
+      "path": "/api/goals/:id"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "GET",
+      "path": "/api/goals/analysis/:goalId"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "POST",
+      "path": "/api/goals/create"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "GET",
+      "path": "/api/goals/list"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "POST",
+      "path": "/api/goals/roast"
+    },
+    {
+      "source": "goalRoutes.js",
+      "method": "PATCH",
+      "path": "/api/goals/save"
+    },
+    {
+      "source": "server.js",
+      "method": "GET",
+      "path": "/api/health"
+    },
+    {
+      "source": "roastRoutes.js",
+      "method": "POST",
+      "path": "/api/roast"
+    },
+    {
+      "source": "roastRoutes.js",
+      "method": "POST",
+      "path": "/api/roast/generate"
+    },
+    {
+      "source": "roastRoutes.js",
+      "method": "GET",
+      "path": "/api/roast/latest"
+    }
+  ],
+  "mongooseModelFiles": [
+    "Budget",
+    "Expense",
+    "Goal",
+    "Roast",
+    "RoastCache",
+    "User"
+  ],
+  "mongooseModelCount": 6,
+  "liveMongoCollections": {
+    "connected": true,
+    "collections": [
+      "budgets",
+      "expenses",
+      "goals",
+      "roastcaches",
+      "roasts",
+      "test_gemini_audit",
+      "users"
+    ],
+    "dbName": "test"
+  }
+}
